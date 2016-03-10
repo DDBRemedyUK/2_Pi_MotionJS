@@ -58,19 +58,24 @@ window.onload = function() {
     }
     
     
+    //Start slideshow
+    $(".slides").rotator();
+    
     
     //MOTION DETECTION EVENTS START HERE
+    //FUTURE: Include a counter that gets reset if the counter goes to green (use banner counter as base)
     socket.on('pirstatus', function (data) {
         if(data) {
-            status.innerHTML = "Motion detected";
-            document.body.style.backgroundColor = "green";
-            
+            console.log('Pi says motion was detected')
+            document.body.style.backgroundColor = "#545454";
             //Fire motion detection events here
+            
+            //TODO when users steps in, play the 'intro' function entirely, then set a time out of 30 seconds, if nothing else happens. Return to Screensaver
             
         }
         else{
-            status.innerHTML = "Awaiting motion";
-            document.body.style.backgroundColor = "red";
+            console.log('Pi is still')
+            document.body.style.backgroundColor = "black";
             
             //Reset non motion events here after a short time
             

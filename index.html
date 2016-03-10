@@ -1,40 +1,54 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>RWD Wall</title>
-        <link rel="stylesheet" type="text/css" media="screen" href="css/styles.css" />
-        <script src="js/jquery.min.js"></script>
-        <script src="/socket.io/socket.io.js"></script>
-        <script src="js/receiver.js"></script>
-    </head>
-    <body>
-        <div id="status">?</div>
-        <div class="current">???</div>
-        <section id="Container">
-            <!--video section: both 'screensaver' and transition profile videos load here-->
-            <div id="video_container">
-                <video id="screensaver" autoplay loop muted>
-                    <source src="video/test_video.mp4" type="video/mp4">
-                </video>
-                <!--<video class="Profile" id="Profile_1">
-<source src="video/test_video.mp4" type="video/mp4">
-</video>-->
+
+<head>
+    <title>RWD Wall</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/styles.css" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.slides.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/receiver.js"></script>
+</head>
+
+<body>
+    <section id="Container">
+        <!--Slideshow container-->
+        <div id="slides_container">
+            <div class="slides">
+                <img src="images/Profile_1.jpg" alt="" class="Profile_1">
+                <img src="images/Profile_2.jpg" alt="" class="Profile_1">
+                <img src="images/Profile_3.jpg" alt="" class="Profile_1">
             </div>
+        </div>
+       
+        <!--video section: both 'screensaver' and transition profile videos load here-->
+        <div id="video_container">
+            <video class="Profile" id="Profile_1">
+                <source src="video/Profile_1.mp4" type="video/mp4">
+            </video>
+            <video class="Profile" id="Profile_2">
+                <source src="video/Profile_2.mp4" type="video/mp4">
+            </video>
+            <video class="Profile" id="Profile_3">
+                <source src="video/Profile_3.mp4" type="video/mp4">
+            </video>
+        </div>
 
-            <!--header is used for heading titles-->
-            <header>
-                <h2 class="preheader">From clinical trials to clinical practice:</h2>
-                <h1>bring real-world data to life</h1>
-            </header>
+        <!--header is used for heading titles-->
+        <header>
+            <h2 class="preheader">From clinical trials to clinical practice:</h2>
+            <h1>bring real-world data to life</h1>
+        </header>
 
 
 
-            <!--Footer used for main footnotes-->
-            <footer>
+        <!--Footer used for main footnotes-->
+        <footer>
+            
+        </footer>
+    </section>
 
-            </footer>
-        </section>
-        
-        
-    </body>
+
+</body>
+
 </html>
