@@ -1,0 +1,200 @@
+/*GILEAD Webapp styles*/
+@import "normalize.css";
+
+@import "font-face.css";
+/*GILEAD Webapp styles*/
+.clear {
+  width: 100%;
+  display: block;
+  clear: both;
+  content: '';
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+.block {
+  display: block;
+}
+.center {
+  margin: 0 auto;
+}
+.solid_border {
+  border: solid 4px black;
+}
+img {
+  behavior: url(htc/iepngfix.htc);
+}
+.ease {
+  -webkit-transition: all 850ms ease-in-out;
+  -moz-transition: all 850ms ease-in-out;
+  -o-transition: all 850ms ease-in-out;
+  transition: all 850ms ease-in-out;
+}
+.ease_slow {
+  -webkit-transition: all 1500ms ease-in-out;
+  -moz-transition: all 1500ms ease-in-out;
+  -o-transition: all 1500ms ease-in-out;
+  transition: all 1500ms ease-in-out;
+}
+.ease_slower {
+  -webkit-transition: all 4000ms ease-in-out;
+  -moz-transition: all 4000ms ease-in-out;
+  -o-transition: all 4000ms ease-in-out;
+  transition: all 4000ms ease-in-out;
+}
+.ease_slower_2 {
+  -webkit-transition: all 6000ms ease-in-out;
+  -moz-transition: all 6000ms ease-in-out;
+  -o-transition: all 6000ms ease-in-out;
+  transition: all 6000ms ease-in-out;
+}
+.ease_fast {
+  -webkit-transition: all 0.7s ease-in-out;
+  -moz-transition: all 0.7s ease-in-out;
+  -o-transition: all 0.7s ease-in-out;
+  transition: all 0.7s ease-in-out;
+}
+.blur {
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+.g_medium {
+  font-family: 'gotham_medium';
+}
+.g_meditalic {
+  font-family: 'gotham_medium_italic';
+}
+.g_book {
+  font-family: 'gotham_book';
+}
+.g_bookitalic {
+  font-family: 'gotham_book_italic';
+}
+.g_bold {
+  font-family: 'gotham_bold';
+}
+.g_black {
+  font-family: 'gotham_black';
+}
+.g_bolditalic {
+  font-family: 'gotham_bold_italic';
+}
+.g_light {
+  font-family: 'gotham_light';
+}
+.g_lightitalic {
+  font-family: 'gotham_light_italic';
+}
+.outlined_font {
+  color: #00131c;
+  -webkit-text-fill-color: #00131c;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #cccccc;
+}
+.noselect {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+
+  -webkit-user-select: none;
+  /* Chrome/Safari/Opera */
+
+  -khtml-user-select: none;
+  /* Konqueror */
+
+  -moz-user-select: none;
+  /* Firefox */
+
+  -ms-user-select: none;
+  /* IE/Edge */
+
+  user-select: none;
+  /* non-prefixed version, currently
+    not supported by any browser */
+
+}
+body {
+  background: black;
+  font-family: 'gotham_book';
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+
+  -webkit-user-select: none;
+  /* Chrome/Safari/Opera */
+
+  -khtml-user-select: none;
+  /* Konqueror */
+
+  -moz-user-select: none;
+  /* Firefox */
+
+  -ms-user-select: none;
+  /* IE/Edge */
+
+  user-select: none;
+  /* non-prefixed version, currently
+    not supported by any browser */
+
+  color: #cccccc;
+}
+body div#status {
+  text-align: center;
+  position: absolute;
+}
+body button#negative {
+  position: absolute;
+  top: 40px;
+}
+body div.current {
+  position: absolute;
+  top: 80px;
+}
+body #Container {
+  width: 1620px;
+  height: 1920px;
+  color: #cccccc;
+  border: solid 1px #cccccc;
+  position: relative;
+  display: block;
+  margin: 0 auto;
+}
+body #Container #video_container {
+  position: absolute;
+}
+body #Container #video_container video {
+  width: 1620px;
+  height: 1920px;
+  -webkit-transition: all 850ms ease-in-out;
+  -moz-transition: all 850ms ease-in-out;
+  -o-transition: all 850ms ease-in-out;
+  transition: all 850ms ease-in-out;
+}
+body #Container #video_container video#screensaver {
+  z-index: 10;
+}
+body #Container #video_container video.Profile {
+  opacity: 0;
+  z-index: 8;
+}
+body #Container header {
+  font-family: 'gotham_bold';
+  text-align: center;
+  text-transform: uppercase;
+}
+body #Container header .preheader {
+  font-size: 40px;
+  margin-bottom: 0px;
+  color: #00131c;
+  -webkit-text-fill-color: #00131c;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #cccccc;
+}
+body #Container header h1 {
+  font-size: 56px;
+  margin: 0;
+}

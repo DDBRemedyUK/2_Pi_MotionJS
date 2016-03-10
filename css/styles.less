@@ -1,0 +1,222 @@
+/*GILEAD Webapp styles*/
+
+@import "normalize.css";
+@import "font-face.css";
+//@import "elements.less";
+
+//Mixins
+
+.b_radius (@value1){
+    -webkit-border-radius: @value1 + 0px;
+    -moz-border-radius: @value1 + 0px;
+    border-radius: @value1 + 0px;
+}
+
+.overall-padding (@padding: 15px 50px){
+    padding: @padding;
+}
+
+.clear{
+    width:100%;
+    display:block;
+    clear: both;
+    content:'';
+}
+
+.left{
+    float: left;
+}
+
+.right{
+    float:right;
+}
+
+.block{
+    display:block;
+}
+
+.center{
+    margin:0 auto;
+}
+
+.solid_border{
+    border: solid 4px black;
+}
+
+img{
+    behavior: url(htc/iepngfix.htc);
+}
+
+//Transitions and effects
+.ease{
+    -webkit-transition: all 850ms ease-in-out;
+    -moz-transition: all 850ms ease-in-out;
+    -o-transition: all 850ms ease-in-out;
+    transition: all 850ms ease-in-out;
+}
+
+.ease_slow{
+    -webkit-transition: all 1500ms ease-in-out;
+    -moz-transition: all 1500ms ease-in-out;
+    -o-transition: all 1500ms ease-in-out;
+    transition: all 1500ms ease-in-out;
+}
+
+.ease_slower{
+    -webkit-transition: all 4000ms ease-in-out;
+    -moz-transition: all 4000ms ease-in-out;
+    -o-transition: all 4000ms ease-in-out;
+    transition: all 4000ms ease-in-out;
+}
+
+.ease_slower_2{
+    -webkit-transition: all 6000ms ease-in-out;
+    -moz-transition: all 6000ms ease-in-out;
+    -o-transition: all 6000ms ease-in-out;
+    transition: all 6000ms ease-in-out;
+}
+
+.ease_fast{
+    -webkit-transition: all 0.7s ease-in-out;
+    -moz-transition: all 0.7s ease-in-out;
+    -o-transition: all 0.7s ease-in-out;
+    transition: all 0.7s ease-in-out;
+}
+
+.blur{
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+}
+
+//fonts-setup
+.g_medium{
+    font-family: 'gotham_medium';
+}
+
+.g_meditalic{
+    font-family: 'gotham_medium_italic';
+}
+
+.g_book{
+    font-family: 'gotham_book';
+}
+
+.g_bookitalic{
+    font-family: 'gotham_book_italic';
+}
+
+.g_bold{
+    font-family: 'gotham_bold';
+}
+
+.g_black{
+    font-family: 'gotham_black';
+}
+
+.g_bolditalic{
+    font-family: 'gotham_bold_italic';
+}
+
+.g_light{
+    font-family: 'gotham_light';
+}
+
+.g_lightitalic{
+    font-family: 'gotham_light_italic';
+}
+
+.outlined_font{
+    color: @w_dark_blue;
+    -webkit-text-fill-color: @w_dark_blue;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: @w_gray;
+}
+
+//Colours
+@w_dark_blue: #00131c;
+@w_purple: #873299;
+@w_gray: #cccccc;
+
+//Disable text selection
+.noselect{
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -khtml-user-select: none;    /* Konqueror */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* IE/Edge */
+    user-select: none;           /* non-prefixed version, currently
+    not supported by any browser */
+}
+
+
+//Main body styles
+body{
+    background: black;
+    .g_book;
+    .noselect;
+    color: @w_gray;
+    
+    //Status testing div
+    div#status{
+        text-align: center;
+        position: absolute;
+    }
+    button#negative{
+        position: absolute;
+        top:40px;
+    }
+    div.current{
+        position: absolute;
+        top:80px;
+    }
+    
+    //container
+    #Container{
+        width: 1620px;
+        height: 1920px;
+        color: @w_gray;
+        border: solid 1px @w_gray;
+        position: relative;
+        .block;
+        .center;
+
+        //video container
+        #video_container{
+            position: absolute;
+            video{
+                width: 1620px;
+                height: 1920px;
+                .ease;
+                &#screensaver{
+                    z-index: 10;
+                }
+                &.Profile{
+                    opacity: 0;
+                    z-index: 8;
+                }
+            }
+        }
+        
+        //header
+        header{
+            .g_bold;
+            text-align: center;
+            text-transform: uppercase;
+            .preheader{
+                font-size:40px;
+                margin-bottom: 0px;
+                .outlined_font;
+            }
+            h1{
+                font-size: 56px;
+                margin:0;
+            }
+        }
+        
+        
+        //NOTE: Profile classes go here
+    }
+}
