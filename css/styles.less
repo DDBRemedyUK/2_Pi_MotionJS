@@ -133,6 +133,57 @@ img{
 @w_purple: #873299;
 @w_gray: #cccccc;
 
+
+//CSS3 animations
+.floating_animation{
+    animation-name: floating;
+    -webkit-animation-name: floating;
+
+    animation-duration: 12s;   
+    -webkit-animation-duration: 12s;
+
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+}
+
+@keyframes floating {
+    0% {
+        transform: translateX(0%);  
+    }
+    30% {
+        transform: translateX(5%);  
+    }
+    50% {
+        transform:translateX(1%)
+    }
+    100% {
+        transform: translateX(0%);
+    }           
+}
+
+.rotating_animation {
+    animation-name: rotating;
+    -webkit-animation-name: rotating;
+
+    animation-duration: 12s;   
+    -webkit-animation-duration: 12s;
+
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes rotating {
+    from{
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to{
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+
 //Disable text selection
 .noselect{
     -webkit-touch-callout: none; /* iOS Safari */
@@ -144,6 +195,18 @@ img{
     not supported by any browser */
 }
 
+.Hidden{
+    opacity: 0; 
+}
+
+.test_hide{
+    display: none;
+}
+
+.overall_size{
+    width: 1620px;
+    height: 1920px;
+}
 
 //Main body styles
 body{
@@ -168,23 +231,22 @@ body{
     
     //container
     #Container{
-        width: 1620px;
-        height: 1920px;
+        .overall_size;
         color: @w_gray;
         //border: solid 1px @w_gray;
         position: relative;
         .block;
         .center;
 
-        //video container
+        //Video container
         #video_container{
             position: absolute;
+            
             //opacity: 0;
             .ease;
             video{
-                width: 1620px;
-                height: 1920px;
-                .ease;
+                .overall_size;
+                .ease_slower;
                 &#screensaver{
                     z-index: 10;
                 }
@@ -196,11 +258,13 @@ body{
             }
         }
         
-        //header
+        //Absolute header
         header{
             .g_bold;
             text-align: center;
             text-transform: uppercase;
+            position: relative;
+            z-index: 20;
             .preheader{
                 font-size:40px;
                 margin-bottom: 0px;
@@ -212,6 +276,7 @@ body{
             }
         }
         
+        //Slideshow
         #slides_container{
             .slides{
                 a{
@@ -227,16 +292,110 @@ body{
                     .ease_slower;
                 }
             }
-            width: 1620px;
-            height: 1920px;
+            .overall_size;
             position: absolute; 
             background: #000;
             .ease_slow;
         }
         
+        //Bio container
+        #Bio{
+            width: 585px;
+            height:677px;
+            position: absolute;
+            top:500px;
+            &:after{
+                content: url('../images/bio_vector.png');
+                .floating_animation;
+                position: absolute;
+            }
+        }
+        
+        #Patients{
+            background: url(../images/patient_BG.png) no-repeat;
+            width: 390;
+            height:101px;
+            position: absolute;
+            right:0px;
+            top:400px;
+            &:before{
+                content: 'Choose another patient';
+                text-transform: uppercase;
+                top: -40px;
+                text-align: center;
+                width: 390px;
+                display: inline-block;
+                position: absolute;
+                .g_bold;
+            }
+            ul{
+                li{
+                    background: url('../images/Profile_1_BG.jpg') no-repeat;
+                    background-size: 810px auto;
+                    background-position: -338px -250px;
+                    width: 99px;
+                    height: 99px;
+                    list-style: none;
+                    float: left;
+                    margin-right: 35px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    position: relative;
+                    display: inline-block;
+                    &.Profile_1{
+                        background: url('../images/Profile_1_BG.jpg') no-repeat;
+                        background-size: 810px auto;
+                        background-position: -338px -250px;
+                    }
+                    &.Profile_2{
+                        background: url('../images/Profile_2_BG.jpg') no-repeat;
+                        background-size: 810px auto;
+                        background-position: -367px -230px;
+                        &:before{
+                            content: url('../images/patient_sphere_2.png');
+                            .rotating_animation;
+                            position: absolute;
+                        }
+                    }
+                    &.Profile_3{
+                        background: url('../images/Profile_3_BG.jpg') no-repeat;
+                        background-size: 810px auto;
+                        background-position: -356px -235px;
+                    }
+                    &.Profile_4{
+                        background: url('../images/Profile_4_BG.jpg') no-repeat;
+                        background-size: 810px auto;
+                        background-position: -338px -250px;
+                        &:before{
+                            content: url('../images/patient_sphere_3.png');
+                            .rotating_animation;
+                            position: absolute;
+                        }
+                    }
+                    
+                    &:before{
+                        content: url('../images/patient_sphere_1.png');
+                        .rotating_animation;
+                        position: absolute;
+                    }
+                }
+                margin:0;
+                padding: 0;
+            }
+        }
+        
+        
         //NOTE: Profile classes go here
         &.Profile_1{
-            
+            #video_container{
+                #Profile_1{
+                    opacity: 1;
+                }
+            }
+            background: url('../images/Profile_1_BG.jpg') no-repeat;
+            #Bio{
+                background: url('../images/Profile_1_bio.png') no-repeat;
+            }
         }
         &.Profile_2{
             #video_container{
@@ -244,6 +403,25 @@ body{
                     opacity: 1;
                 }
             }
+            background: url('../images/Profile_2_BG.jpg') no-repeat;
+        }
+        &.Profile_3{
+            #video_container{
+                #Profile_3{
+                    opacity: 1;
+                }
+            }
+            background: url('../images/Profile_3_BG.jpg') no-repeat;
+        }
+        &.Profile_4{
+            #video_container{
+                #Profile_4{
+                    opacity: 1;
+                }
+            }
+            background: url('../images/Profile_4_BG.jpg') no-repeat;
         }
     }
 }
+
+

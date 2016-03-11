@@ -15,7 +15,7 @@ window.onload = function() {
     var screenSaver = $('#slides_container');
 
     //Variable to establish which profile to load (MAIN function)
-    var profiletoLoad = loadProfile_1; //Load first profile at the start
+    var loadProfile
 
     video.each(function() {
         var vidID = $(this).attr('id');
@@ -54,40 +54,57 @@ window.onload = function() {
 
         if (currentProfile[0] == 'Profile_1') {
             console.log('go to profile 1');
-            profiletoLoad = loadProfile_1
         } else if (currentProfile[0] == 'Profile_2') {
             console.log('go to profile 2');
-            profiletoLoad = loadProfile_2
         } else if (currentProfile[0] == 'Profile_3') {
             console.log('go to profile 3');
-            profiletoLoad = loadProfile_4
         } else if (currentProfile[0] == 'Profile_4') {
             console.log('go to profile 4');
-            profiletoLoad = loadProfile_4
         }
     }
 
 
-    //MAIN load Profile functions
-    function loadProfile_1() {
-        //alert('load profile 1');
-    }
-
-    function loadProfile_2() {
-        //alert('load profile 2');
-        $('#Container').addClass('Profile_2')
+    //MAIN load Profile function
+    function loadProfile() {
+        //Add profile class to overall Container
+        $('#Container').addClass(currentProfile[0]);
+        //Fade screensaver
         screenSaver.css('opacity', '0');
+        //Once faded out, play profile introduction video
+        var currentVideo = $('#video_container' + ' ' + '#'+currentProfile[0]).get(0)
+        
         screenSaver.on("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function() {
-            $('#video_container #Profile_2').get(0).play();
+            currentVideo.play();
         });
-    }
+        //Stop video at 5 seconds (tap to continue screen)
+        var checkedFirst = false;
+        var checkedSecond = false;
+        
+        currentVideo.addEventListener('timeupdate', function(event)
+                                 {
+            console.log(currentVideo.currentTime); 
+            if (currentVideo.currentTime >= 5 && !checkedFirst)
+            {
+                checkedFirst = true;
+                currentVideo.pause();
+            }
 
-    function loadProfile_3() {
-        //alert('load profile 2');
-    }
+            if (currentVideo.currentTime >= 17 && !checkedSecond)
+            {
+                checkedSecond = true;
+                currentVideo.pause();
+                $('#video_container').addClass('Hidden');
+            }
+        });
 
-    function loadProfile_4() {
-        //alert('load profile 2');
+
+        $('#video_container').click(function(event){
+            currentVideo.play();
+            console.log('replay');
+        });
+        
+        //TODO: gotta format the HTML fade in and out stagesto follow the video play. (check CSS)
+        
     }
 
 
@@ -104,7 +121,7 @@ window.onload = function() {
             //Clear timer in slideshow so it stops on selected profile 
             //clearInterval(idleInterval);
             
-            //profiletoLoad();
+            //loadProfile();
 
             console.log(currentProfile[0]);
 
