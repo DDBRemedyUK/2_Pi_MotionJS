@@ -158,6 +158,10 @@ body #Container {
 }
 body #Container #video_container {
   position: absolute;
+  -webkit-transition: all 850ms ease-in-out;
+  -moz-transition: all 850ms ease-in-out;
+  -o-transition: all 850ms ease-in-out;
+  transition: all 850ms ease-in-out;
 }
 body #Container #video_container video {
   width: 1620px;
@@ -173,6 +177,7 @@ body #Container #video_container video#screensaver {
 body #Container #video_container video.Profile {
   opacity: 0;
   z-index: 8;
+  position: absolute;
 }
 body #Container header {
   font-family: 'gotham_bold';
@@ -196,6 +201,10 @@ body #Container #slides_container {
   height: 1920px;
   position: absolute;
   background: #000;
+  -webkit-transition: all 1500ms ease-in-out;
+  -moz-transition: all 1500ms ease-in-out;
+  -o-transition: all 1500ms ease-in-out;
+  transition: all 1500ms ease-in-out;
 }
 body #Container #slides_container .slides .current {
   opacity: 1!important;
@@ -208,4 +217,7 @@ body #Container #slides_container .slides .item {
   -moz-transition: all 1800ms ease-in-out;
   -o-transition: all 1800ms ease-in-out;
   transition: all 1800ms ease-in-out;
+}
+body #Container.Profile_2 #video_container #Profile_2 {
+  opacity: 1;
 }

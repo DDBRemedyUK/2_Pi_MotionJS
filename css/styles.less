@@ -179,6 +179,8 @@ body{
         //video container
         #video_container{
             position: absolute;
+            //opacity: 0;
+            .ease;
             video{
                 width: 1620px;
                 height: 1920px;
@@ -189,6 +191,7 @@ body{
                 &.Profile{
                     opacity: 0;
                     z-index: 8;
+                    position: absolute;
                 }
             }
         }
@@ -228,8 +231,19 @@ body{
             height: 1920px;
             position: absolute; 
             background: #000;
+            .ease_slow;
         }
         
         //NOTE: Profile classes go here
+        &.Profile_1{
+            
+        }
+        &.Profile_2{
+            #video_container{
+                #Profile_2{
+                    opacity: 1;
+                }
+            }
+        }
     }
 }
