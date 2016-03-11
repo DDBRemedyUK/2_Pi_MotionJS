@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="css/styles.css" />
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery.slides.js"></script>
+    <!--<script src="js/attrchange.js"></script>-->
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/receiver.js"></script>
 </head>
@@ -15,9 +16,10 @@
         <!--Slideshow container-->
         <div id="slides_container">
             <div class="slides">
-                <img src="images/Profile_1.jpg" alt="" class="Profile_1">
-                <img src="images/Profile_2.jpg" alt="" class="Profile_1">
-                <img src="images/Profile_3.jpg" alt="" class="Profile_1">
+                <img src="images/Profile_1.jpg" alt="" class="Profile_1 current">
+                <img src="images/Profile_2.jpg" alt="" class="Profile_2">
+                <img src="images/Profile_3.jpg" alt="" class="Profile_3">
+                <img src="images/Profile_3.jpg" alt="" class="Profile_4"> 
             </div>
         </div>
        
@@ -31,6 +33,9 @@
             </video>
             <video class="Profile" id="Profile_3">
                 <source src="video/Profile_3.mp4" type="video/mp4">
+            </video>
+            <video class="Profile" id="Profile_4">
+                <source src="video/Profile_4.mp4" type="video/mp4">
             </video>
         </div>
 

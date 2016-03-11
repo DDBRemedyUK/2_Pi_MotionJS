@@ -14,6 +14,8 @@
 
             if ($item.length > 1) {
                 $item.first().addClass('current')
+                //console.log($('.current').attr('class'));
+                //var currentProfile = $('.current').attr('class').split(' ');
                 setInterval(function() {
                     var c = $t.find('.current');
                     if (c.next().length === 0) {
@@ -21,7 +23,10 @@
                         $item.first().addClass('current')
                     } else {
                         c.removeClass('current').next().addClass('current')
-                    }
+                    }                
+                    //console.log($('.current').attr('class'));
+                    //currentProfile = $('.current').attr('class').split(' ');
+                    //console.log(currentProfile[0]);
                 }, settings.interval);
             }
         });
