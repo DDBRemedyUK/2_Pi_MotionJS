@@ -76,6 +76,8 @@ window.onload = function() {
             //Fade in looping BG
             $('#BG_source video').attr('src', 'video/' + currentProfile[0] + '_BG.mp4');
             $('#BG_source').addClass('faded_in');
+             
+            //dynamicNav();
             
             //Once faded out, play profile introduction video
             var currentVideo = $('#video_container' + ' ' + '#'+currentProfile[0]).get(0)
@@ -189,6 +191,11 @@ window.onload = function() {
                 $('#Container').addClass('Phase_2');
                 
                 
+                console.log('#Patients ul li' + '.' +switchProfile);
+                
+                $('#Patients ul li' + '.' +switchProfile).insertAfter('#Patients ul li:last')
+                
+                //NOTE: Fade out BG video source, swap for correctsource and then fade in again (use .delay)
                 
             });
         });
@@ -196,7 +203,17 @@ window.onload = function() {
         
     };
     
+    //Patient navigation reacts dynamically to overall container class
+    function dynamicNav(){
+        $('#Patients ul li').each(function(){
+            if($(this).hasClass(currentProfile[0])){
+                console.log('The container class matches with one of the Nav items');
+                $(this).insertAfter('#Patients ul li:last');
+            }
+        });
+    }
     
+    //dynamicNav();
     
     popupModals();
     

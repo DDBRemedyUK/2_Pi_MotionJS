@@ -364,6 +364,7 @@ body{
                     cursor: pointer;
                     position: relative;
                     display: inline-block;
+                    .ease;
                     &.Profile_1{
                         background: url('../images/Profile_1_BG.jpg') no-repeat;
                         background-size: 810px auto;
@@ -394,7 +395,9 @@ body{
                             position: absolute;
                         }
                     }
-                    
+                    &:last-child{
+                        display: none;
+                    }
                     &:before{
                         content: url('../images/patient_sphere_1.png');
                         .rotating_animation;

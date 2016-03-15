@@ -349,6 +349,10 @@ body #Container #Patients ul li {
   cursor: pointer;
   position: relative;
   display: inline-block;
+  -webkit-transition: all 850ms ease-in-out;
+  -moz-transition: all 850ms ease-in-out;
+  -o-transition: all 850ms ease-in-out;
+  transition: all 850ms ease-in-out;
 }
 body #Container #Patients ul li.Profile_1 {
   background: url('../images/Profile_1_BG.jpg') no-repeat;
@@ -387,6 +391,9 @@ body #Container #Patients ul li.Profile_4:before {
   -o-animation: rotating 12s linear infinite;
   animation: rotating 12s linear infinite;
   position: absolute;
+}
+body #Container #Patients ul li:last-child {
+  display: none;
 }
 body #Container #Patients ul li:before {
   content: url('../images/patient_sphere_1.png');
