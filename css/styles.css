@@ -46,10 +46,10 @@ img {
   transition: all 1800ms ease-in-out;
 }
 .ease_fast {
-  -webkit-transition: all 0.7s ease-in-out;
-  -moz-transition: all 0.7s ease-in-out;
-  -o-transition: all 0.7s ease-in-out;
-  transition: all 0.7s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 .blur {
   -webkit-filter: blur(5px);
@@ -114,12 +114,11 @@ img {
   }
 }
 .rotating_animation {
-  animation-name: rotating;
-  -webkit-animation-name: rotating;
-  animation-duration: 12s;
-  -webkit-animation-duration: 12s;
-  animation-iteration-count: infinite;
-  -webkit-animation-iteration-count: infinite;
+  -webkit-animation: rotating 12s linear infinite;
+  -moz-animation: rotating 12s linear infinite;
+  -ms-animation: rotating 12s linear infinite;
+  -o-animation: rotating 12s linear infinite;
+  animation: rotating 12s linear infinite;
 }
 @-webkit-keyframes rotating {
   from {
@@ -152,15 +151,24 @@ img {
     not supported by any browser */
 
 }
-.Hidden {
-  opacity: 0;
+.invisible {
+  opacity: 0!important;
+}
+.hidden {
+  display: none;
 }
 .test_hide {
   display: none;
 }
+.faded_in {
+  opacity: 1!important;
+}
 .overall_size {
   width: 1620px;
   height: 1920px;
+}
+.no_click {
+  pointer-events: none;
 }
 body {
   background: black;
@@ -205,9 +213,14 @@ body #Container {
   position: relative;
   display: block;
   margin: 0 auto;
+  -webkit-transition: all 1500ms ease-in-out;
+  -moz-transition: all 1500ms ease-in-out;
+  -o-transition: all 1500ms ease-in-out;
+  transition: all 1500ms ease-in-out;
 }
 body #Container #video_container {
   position: absolute;
+  opacity: 1;
   -webkit-transition: all 850ms ease-in-out;
   -moz-transition: all 850ms ease-in-out;
   -o-transition: all 850ms ease-in-out;
@@ -252,7 +265,6 @@ body #Container #slides_container {
   width: 1620px;
   height: 1920px;
   position: absolute;
-  background: #000;
   -webkit-transition: all 1500ms ease-in-out;
   -moz-transition: all 1500ms ease-in-out;
   -o-transition: all 1500ms ease-in-out;
@@ -272,9 +284,15 @@ body #Container #slides_container .slides .item {
 }
 body #Container #Bio {
   width: 585px;
-  height: 677px;
+  height: 1000px;
   position: absolute;
   top: 500px;
+  left: 0px;
+  opacity: 0;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 body #Container #Bio:after {
   content: url('../images/bio_vector.png');
@@ -286,6 +304,11 @@ body #Container #Bio:after {
   -webkit-animation-iteration-count: infinite;
   position: absolute;
 }
+body #Container #Bio.Reduced {
+  transform: scale(0.5, 0.5);
+  top: 250px;
+  left: 150px;
+}
 body #Container #Patients {
   background: url(../images/patient_BG.png) no-repeat;
   width: 390;
@@ -293,6 +316,11 @@ body #Container #Patients {
   position: absolute;
   right: 0px;
   top: 400px;
+  opacity: 0;
+  -webkit-transition: all 850ms ease-in-out;
+  -moz-transition: all 850ms ease-in-out;
+  -o-transition: all 850ms ease-in-out;
+  transition: all 850ms ease-in-out;
 }
 body #Container #Patients:before {
   content: 'Choose another patient';
@@ -334,12 +362,11 @@ body #Container #Patients ul li.Profile_2 {
 }
 body #Container #Patients ul li.Profile_2:before {
   content: url('../images/patient_sphere_2.png');
-  animation-name: rotating;
-  -webkit-animation-name: rotating;
-  animation-duration: 12s;
-  -webkit-animation-duration: 12s;
-  animation-iteration-count: infinite;
-  -webkit-animation-iteration-count: infinite;
+  -webkit-animation: rotating 12s linear infinite;
+  -moz-animation: rotating 12s linear infinite;
+  -ms-animation: rotating 12s linear infinite;
+  -o-animation: rotating 12s linear infinite;
+  animation: rotating 12s linear infinite;
   position: absolute;
 }
 body #Container #Patients ul li.Profile_3 {
@@ -354,26 +381,162 @@ body #Container #Patients ul li.Profile_4 {
 }
 body #Container #Patients ul li.Profile_4:before {
   content: url('../images/patient_sphere_3.png');
-  animation-name: rotating;
-  -webkit-animation-name: rotating;
-  animation-duration: 12s;
-  -webkit-animation-duration: 12s;
-  animation-iteration-count: infinite;
-  -webkit-animation-iteration-count: infinite;
+  -webkit-animation: rotating 12s linear infinite;
+  -moz-animation: rotating 12s linear infinite;
+  -ms-animation: rotating 12s linear infinite;
+  -o-animation: rotating 12s linear infinite;
+  animation: rotating 12s linear infinite;
   position: absolute;
 }
 body #Container #Patients ul li:before {
   content: url('../images/patient_sphere_1.png');
-  animation-name: rotating;
-  -webkit-animation-name: rotating;
+  -webkit-animation: rotating 12s linear infinite;
+  -moz-animation: rotating 12s linear infinite;
+  -ms-animation: rotating 12s linear infinite;
+  -o-animation: rotating 12s linear infinite;
+  animation: rotating 12s linear infinite;
+  position: absolute;
+  width: 99px;
+  height: 99px;
+}
+body #Container #Testimonial {
+  font-family: 'gotham_medium_italic';
+  -webkit-transition: all 850ms ease-in-out;
+  -moz-transition: all 850ms ease-in-out;
+  -o-transition: all 850ms ease-in-out;
+  transition: all 850ms ease-in-out;
+  font-size: 24px;
+  width: 480px;
+  padding: 0 12px;
+  box-sizing: border-box;
+  position: absolute;
+  top: 900px;
+}
+body #Container #Testimonial ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+body #Container #Testimonial ul li {
+  text-align: center;
+  margin-bottom: 140px;
+  position: relative;
+}
+body #Container #Testimonial ul li:after {
+  position: absolute;
+  top: 0;
+  left: 25%;
+  animation-name: floating;
+  -webkit-animation-name: floating;
   animation-duration: 12s;
   -webkit-animation-duration: 12s;
   animation-iteration-count: infinite;
   -webkit-animation-iteration-count: infinite;
-  position: absolute;
 }
-body #Container.Profile_1 {
-  background: url('../images/Profile_1_BG.jpg') no-repeat;
+body #Container #Testimonial ul li:nth-child(1):after {
+  content: url('../images/testimonial_1');
+}
+body #Container #Testimonial ul li:nth-child(2):after {
+  content: url('../images/testimonial_2');
+}
+body #Container #Testimonial ul li:nth-child(3):after {
+  content: url('../images/testimonial_3');
+  top: -50px;
+}
+body #Container #Keypoints {
+  -webkit-transition: all 850ms ease-in-out;
+  -moz-transition: all 850ms ease-in-out;
+  -o-transition: all 850ms ease-in-out;
+  transition: all 850ms ease-in-out;
+  font-family: 'gotham_medium';
+  font-size: 24px;
+  width: 500px;
+  padding: 0 12px;
+  box-sizing: border-box;
+  position: absolute;
+  top: 900px;
+  right: 85px;
+}
+body #Container #Keypoints ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+body #Container #Keypoints ul li {
+  text-align: center;
+  margin-bottom: 140px;
+  position: relative;
+}
+body #Container #Keypoints ul li:before {
+  position: absolute;
+  top: 0;
+  right: 30%;
+  animation-name: floating;
+  -webkit-animation-name: floating;
+  animation-duration: 12s;
+  -webkit-animation-duration: 12s;
+  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+}
+body #Container #Keypoints ul li:nth-child(1):before {
+  content: url('../images/keypoint_1.png');
+}
+body #Container #Keypoints ul li:nth-child(2):before {
+  content: url('../images/keypoint_2.png');
+}
+body #Container #Keypoints ul li:nth-child(3):before {
+  content: url('../images/keypoint_3.png');
+}
+body #Container #Keypoints ul li button {
+  background: url('../images/more_btn.png') no-repeat;
+  width: 310px;
+  height: 76px;
+  border: 0;
+  position: absolute;
+  left: 55%;
+  top: 50%;
+  margin-top: -40px;
+}
+body #Container #Keypoints ul li button:focus {
+  outline: none;
+  border: none;
+}
+body #Container #Keypoints ul li strong {
+  font-family: 'gotham_bold';
+}
+body #Container #Keypoints ul li div {
+  position: fixed;
+  top: 700px;
+  left: 55%;
+  z-index: 40;
+  display: none;
+}
+body #Container #Keypoints ul li div .close_btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background: url('../images/close_btn.png') no-repeat;
+  width: 33px;
+  height: 32px;
+  cursor: pointer;
+}
+body #Container section {
+  opacity: 0;
+  -webkit-transition: all 850ms ease-in-out;
+  -moz-transition: all 850ms ease-in-out;
+  -o-transition: all 850ms ease-in-out;
+  transition: all 850ms ease-in-out;
+}
+body #Container #BG_source {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0;
+  -webkit-transition: all 1800ms ease-in-out;
+  -moz-transition: all 1800ms ease-in-out;
+  -o-transition: all 1800ms ease-in-out;
+  transition: all 1800ms ease-in-out;
 }
 body #Container.Profile_1 #video_container #Profile_1 {
   opacity: 1;
@@ -381,21 +544,60 @@ body #Container.Profile_1 #video_container #Profile_1 {
 body #Container.Profile_1 #Bio {
   background: url('../images/Profile_1_bio.png') no-repeat;
 }
-body #Container.Profile_2 {
-  background: url('../images/Profile_2_BG.jpg') no-repeat;
-}
 body #Container.Profile_2 #video_container #Profile_2 {
   opacity: 1;
 }
-body #Container.Profile_3 {
-  background: url('../images/Profile_3_BG.jpg') no-repeat;
+body #Container.Profile_2 #Bio {
+  background: url('../images/Profile_2_bio.png') no-repeat;
 }
 body #Container.Profile_3 #video_container #Profile_3 {
   opacity: 1;
 }
-body #Container.Profile_4 {
-  background: url('../images/Profile_4_BG.jpg') no-repeat;
+body #Container.Profile_3 #Bio {
+  background: url('../images/Profile_3_bio.png') no-repeat;
 }
 body #Container.Profile_4 #video_container #Profile_4 {
+  opacity: 1;
+}
+body #Container.Profile_4 #Bio {
+  background: url('../images/Profile_4_bio.png') no-repeat;
+}
+body #Container footer {
+  column-count: 2;
+  color: #959595;
+  font-size: 12px;
+  position: absolute;
+  bottom: 10px;
+  line-height: 120%;
+  z-index: 20;
+}
+body #Container footer ol {
+  margin: 0;
+  padding: 0px;
+  list-style: inside decimal;
+}
+body #Container footer ol li {
+  break-inside: avoid-column;
+}
+body #Container footer sup {
+  font-size: 70%;
+}
+body #Container.Phase_2 #Patients {
+  opacity: 1;
+}
+body #Container.Phase_2.Profile_1 #Testimonial.Profile_1,
+body #Container.Phase_2.Profile_1 #Keypoints.Profile_1 {
+  opacity: 1;
+}
+body #Container.Phase_2.Profile_2 #Testimonial.Profile_2,
+body #Container.Phase_2.Profile_2 #Keypoints.Profile_2 {
+  opacity: 1;
+}
+body #Container.Phase_2.Profile_3 #Testimonial.Profile_3,
+body #Container.Phase_2.Profile_3 #Keypoints.Profile_3 {
+  opacity: 1;
+}
+body #Container.Phase_2.Profile_4 #Testimonial.Profile_4,
+body #Container.Phase_2.Profile_4 #Keypoints.Profile_4 {
   opacity: 1;
 }

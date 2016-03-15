@@ -27,7 +27,7 @@ window.onload = function() {
 
     //Slideshow
     var idleTime = 0;
-    var idleInterval = setInterval(timerIncrement, 5000); // 2.5 seconds
+    var idleInterval = setInterval(timerIncrement, 5000); // 5 seconds
 
     var $t = $('.slides'),
         $item = $t.children().addClass('item')
@@ -63,67 +63,165 @@ window.onload = function() {
         }
     }
 
-
-    //MAIN load Profile function
+    //NOTE: creating global variable to be used as a closure to avoid the event firing more than once.
+    var profileLoaded;
     function loadProfile() {
-        //Add profile class to overall Container
-        $('#Container').addClass(currentProfile[0]);
-        //Fade screensaver
-        screenSaver.css('opacity', '0');
-        //Once faded out, play profile introduction video
-        var currentVideo = $('#video_container' + ' ' + '#'+currentProfile[0]).get(0)
-        
-        screenSaver.on("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function() {
-            currentVideo.play();
-        });
-        //Stop video at 5 seconds (tap to continue screen)
-        var checkedFirst = false;
-        var checkedSecond = false;
-        
-        currentVideo.addEventListener('timeupdate', function(event)
-                                 {
-            console.log(currentVideo.currentTime); 
-            if (currentVideo.currentTime >= 5 && !checkedFirst)
-            {
-                checkedFirst = true;
-                currentVideo.pause();
-            }
+        if (!profileLoaded) {
+            profileLoaded = true;
+            
+            //Add profile class to overall Container
+            $('#Container').addClass(currentProfile[0]);
+            //Fade screensaver
+            screenSaver.css('opacity', '0');
+            //Fade in looping BG
+            $('#BG_source video').attr('src', 'video/' + currentProfile[0] + '_BG.mp4');
+            $('#BG_source').addClass('faded_in');
+            
+            //Once faded out, play profile introduction video
+            var currentVideo = $('#video_container' + ' ' + '#'+currentProfile[0]).get(0)
 
-            if (currentVideo.currentTime >= 17 && !checkedSecond)
-            {
-                checkedSecond = true;
-                currentVideo.pause();
-                $('#video_container').addClass('Hidden');
-            }
-        });
+            screenSaver.on("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function() {
+                currentVideo.play();
+            });
+            //Stop video at 5 seconds (tap to continue screen)
+            var checkedFirst = false;
+            var checkedSecond = false;
+
+            currentVideo.addEventListener('timeupdate', function(event)
+                                          {
+                //console.log(currentVideo.currentTime); 
+                if (currentVideo.currentTime >= 5 && !checkedFirst)
+                {
+                    checkedFirst = true;
+                    currentVideo.pause();
+                }
+
+                if (currentVideo.currentTime >= 13 && !checkedSecond)
+                {
+                    checkedSecond = true;
+                    currentVideo.pause();
+                    $('#video_container').addClass('invisible');
+                    $('#video_container').on("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(){
+                        console.log('video end');
+                        $('#Bio').addClass('faded_in');
+                    });
+                    
+                    //Make Bio smaller, fade rest of the elements after 3 seconds
+                    $('#Bio').on("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(){
+                        console.log('Bio just faded in!');
+                        //setTimeout(function(){
+                            /*$('#video_container').delay(3000).addClass('hidden');
+                            
+                            $('#Container').addClass('Phase_2');
+                            
+                            $('#Bio').addClass('Reduced');*/
+
+                            //$('#Testimonial' + '.' + currentProfile[0]).addClass('faded_in');
+                            //$('#Keypoints' + '.' + currentProfile[0]).addClass('faded_in');
+                            
+                            
+                        //}, 3000);
+                        
+                        
+                        $('#video_container').delay(5000).fadeOut('slow').queue(function(){
+                            $('#Container').addClass('Phase_2');
+                            $('#Bio').addClass('Reduced');
+                        });
+
+                        //$('#Container').delay(3000).addClass('Phase_2');
+
+                        //$('#Bio').delay(3000).addClass('Reduced');
+                        
+                    });
+                    
+                }
+            });
 
 
-        $('#video_container').click(function(event){
-            currentVideo.play();
-            console.log('replay');
-        });
-        
-        //TODO: gotta format the HTML fade in and out stagesto follow the video play. (check CSS)
-        
+            $('#video_container').click(function(event){
+                currentVideo.play();
+                console.log('replay');
+            });
+
+            //TODO: gotta format the HTML fade in and out stages to follow the video play. (check CSS)
+
+            //NOTE: Main function could continue here, however it will be moved to the bottom as the stand might not be triggered by the motion sensor.
+            //showElements();
+        }
     }
 
+    //Modal windows function
+    function popupModals(){
+        var popupBtn = $('#Keypoints ul li button');
+        var otherModals = $('#Keypoints ul li div');
+        var popupClass
+        
+        popupBtn.each(function(){
+            $(this).on('click', function(){
+                console.log($(this).attr('class'));
+                otherModals.fadeOut('slow');
+                $(this).next('div').fadeIn('slow');
+            });
+        });
+
+        //close btn function
+        $('.close_btn').on('click', function(){
+            $(this).parent('div').fadeOut('slow');
+        });
+    };
+    
+    //Patient navigation function
+    function patientSwitch(){
+        var patientBtn = $('#Patients ul li');
+        
+        patientBtn.each(function(){
+            $(this).on('click', function(){
+                var switchProfile = $(this).attr('class')
+                console.log(switchProfile);
+                
+                /*$('#Container').removeClass(currentProfile[0]);
+                $('#Container').removeClass('Phase_2');*/
+                //Reset container class
+                $('#Container').removeClass('Phase_2');
+                $('#Container').attr('class', '');
+                
+                $('#Container').addClass(switchProfile);
+                $('#Container').addClass('Phase_2');
+                
+                
+                
+            });
+        });
+        
+        
+    };
+    
+    
+    
+    popupModals();
+    
+    patientSwitch();
 
     //MOTION DETECTION EVENTS START HERE
     //FUTURE: Include a counter that gets reset if the counter goes to green (use banner counter as base)
     socket.on('pirstatus', function(data) {
         if (data) {
-            console.log('Pi says motion was detected')
-            //document.body.style.backgroundColor = "#545454";
-            //Fire motion detection events here
-
-            //TODO when users steps in, play the 'intro' function entirely, then set a time out of 30 seconds, if nothing else happens. Return to Screensaver
+            //Fire motion detection event here
             
-            //Clear timer in slideshow so it stops on selected profile 
-            //clearInterval(idleInterval);
+            //Clear timer in slideshow so it stops on selected profile
             
-            //loadProfile();
+            //Only trigger the main function if the container section does NOT have any class
+            if($('#Container').attr('class') == ''){
+                console.log('Pi says motion was detected')
+                
+                clearInterval(idleInterval);
 
-            console.log(currentProfile[0]);
+                loadProfile();
+
+                console.log(currentProfile[0]);
+            }
+
+            //FUTURE: Set time out for reverting the main function if the user is inactive for a few minutes. Return to slideshow
 
         } else {
             console.log('Pi is still')
@@ -133,4 +231,6 @@ window.onload = function() {
 
         }
     });
+
+    
 }

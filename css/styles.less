@@ -70,10 +70,10 @@ img{
 }
 
 .ease_fast{
-    -webkit-transition: all 0.7s ease-in-out;
-    -moz-transition: all 0.7s ease-in-out;
-    -o-transition: all 0.7s ease-in-out;
-    transition: all 0.7s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
 }
 
 .blur{
@@ -132,6 +132,7 @@ img{
 @w_dark_blue: #00131c;
 @w_purple: #873299;
 @w_gray: #cccccc;
+@w_darkgray: #959595;
 
 
 //CSS3 animations
@@ -162,14 +163,11 @@ img{
 }
 
 .rotating_animation {
-    animation-name: rotating;
-    -webkit-animation-name: rotating;
-
-    animation-duration: 12s;   
-    -webkit-animation-duration: 12s;
-
-    animation-iteration-count: infinite;
-    -webkit-animation-iteration-count: infinite;
+    -webkit-animation: rotating 12s linear infinite;
+    -moz-animation: rotating 12s linear infinite;
+    -ms-animation: rotating 12s linear infinite;
+    -o-animation: rotating 12s linear infinite;
+    animation: rotating 12s linear infinite;
 }
 
 @-webkit-keyframes rotating {
@@ -195,17 +193,31 @@ img{
     not supported by any browser */
 }
 
-.Hidden{
-    opacity: 0; 
+.invisible{
+    opacity: 0!important; 
+    //display: none;
+}
+
+
+.hidden{
+     display: none;
 }
 
 .test_hide{
     display: none;
 }
 
+.faded_in{
+    opacity: 1!important;
+}
+
 .overall_size{
     width: 1620px;
     height: 1920px;
+}
+
+.no_click{
+    pointer-events: none;
 }
 
 //Main body styles
@@ -237,12 +249,12 @@ body{
         position: relative;
         .block;
         .center;
-
+        .ease_slow;
         //Video container
         #video_container{
             position: absolute;
-            
-            //opacity: 0;
+            //background: black;
+            opacity: 1;
             .ease;
             video{
                 .overall_size;
@@ -294,20 +306,28 @@ body{
             }
             .overall_size;
             position: absolute; 
-            background: #000;
+            //background: #000;
             .ease_slow;
         }
         
-        //Bio container
+        //Bio container and sections
         #Bio{
             width: 585px;
-            height:677px;
+            height:1000px;
             position: absolute;
             top:500px;
+            left:0px;
+            opacity: 0;
+            .ease_fast;
             &:after{
                 content: url('../images/bio_vector.png');
                 .floating_animation;
                 position: absolute;
+            }
+            &.Reduced{
+                transform: scale(0.5,0.5);
+                top: 250px;
+                left: 150px;
             }
         }
         
@@ -318,6 +338,8 @@ body{
             position: absolute;
             right:0px;
             top:400px;
+            opacity: 0;
+            .ease;
             &:before{
                 content: 'Choose another patient';
                 text-transform: uppercase;
@@ -377,6 +399,8 @@ body{
                         content: url('../images/patient_sphere_1.png');
                         .rotating_animation;
                         position: absolute;
+                        width: 99px;
+                        height: 99px;
                     }
                 }
                 margin:0;
@@ -384,7 +408,127 @@ body{
             }
         }
         
+        #Testimonial{
+            .g_meditalic;
+            .ease;
+            font-size:24px;
+            width: 480px;
+            padding: 0 12px;
+            box-sizing: border-box;
+            position: absolute;
+            top:900px;
+            ul{
+                margin:0;
+                padding:0;
+                list-style: none;
+                li{
+                    text-align: center;
+                    margin-bottom: 140px;
+                    position: relative;
+                    &:after{
+                        position: absolute;
+                        top:0;
+                        left:25%;
+                        .floating_animation;
+                    }
+                    &:nth-child(1):after{
+                        content: url('../images/testimonial_1');
+                    }
+                    &:nth-child(2):after{
+                        content: url('../images/testimonial_2');
+                    }
+                    &:nth-child(3):after{
+                        content: url('../images/testimonial_3');
+                        top:-50px;
+                    }
+                }
+            }
+        }
         
+        #Keypoints{
+            .ease;
+            .g_medium;
+            font-size:24px;
+            width: 500px;
+            padding: 0 12px;
+            box-sizing: border-box;
+            position: absolute;
+            top:900px;
+            right:85px;
+            ul{
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                li{
+                    text-align: center;
+                    margin-bottom: 140px;
+                    position: relative;
+                    &:before{
+                        position: absolute;
+                        top:0;
+                        right:30%;
+                        .floating_animation;
+                    }
+                    &:nth-child(1):before{
+                        content: url('../images/keypoint_1.png');
+                    }
+                    &:nth-child(2):before{
+                        content: url('../images/keypoint_2.png');
+                    }
+                    &:nth-child(3):before{
+                        content: url('../images/keypoint_3.png');
+                    }
+                    button{
+                        background: url('../images/more_btn.png') no-repeat;
+                        width: 310px;
+                        height:76px;
+                        border: 0;
+                        position: absolute;
+                        left: 55%;
+                        top: 50%;
+                        margin-top: -40px;
+                        &:focus{
+                            outline: none;
+                            border: none;
+                        }
+                    }
+                    strong{
+                        .g_bold;
+                    }
+                    div{
+                        position: fixed;
+                        top:700px;
+                        left:55%;
+                        z-index: 40;
+                        display: none;
+                        .close_btn{
+                            position: absolute;
+                            right: 10px;
+                            top: 10px;
+                            background: url('../images/close_btn.png') no-repeat;
+                            width: 33px;
+                            height:32px;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+        
+        section{
+            opacity: 0;
+            .ease;
+        }
+        
+        #BG_source{
+            position: absolute;
+            top:0;
+            left:0;
+            z-index: -1;
+            opacity: 0;
+            .ease_slower;
+        }
+
         //NOTE: Profile classes go here
         &.Profile_1{
             #video_container{
@@ -392,7 +536,6 @@ body{
                     opacity: 1;
                 }
             }
-            background: url('../images/Profile_1_BG.jpg') no-repeat;
             #Bio{
                 background: url('../images/Profile_1_bio.png') no-repeat;
             }
@@ -403,7 +546,9 @@ body{
                     opacity: 1;
                 }
             }
-            background: url('../images/Profile_2_BG.jpg') no-repeat;
+            #Bio{
+                background: url('../images/Profile_2_bio.png') no-repeat;
+            }
         }
         &.Profile_3{
             #video_container{
@@ -411,7 +556,9 @@ body{
                     opacity: 1;
                 }
             }
-            background: url('../images/Profile_3_BG.jpg') no-repeat;
+            #Bio{
+                background: url('../images/Profile_3_bio.png') no-repeat;
+            }
         }
         &.Profile_4{
             #video_container{
@@ -419,8 +566,77 @@ body{
                     opacity: 1;
                 }
             }
-            background: url('../images/Profile_4_BG.jpg') no-repeat;
+            #Bio{
+                background: url('../images/Profile_4_bio.png') no-repeat;
+            }
         }
+        
+        
+        //Main footer
+        footer{
+            column-count: 2;
+            color: @w_darkgray;
+            font-size: 12px;
+            position: absolute;
+            bottom:10px;
+            line-height: 120%;
+            z-index: 20;
+            ol{
+                margin:0;
+                padding: 0px;
+                list-style: inside decimal;
+                li{
+                    break-inside: avoid-column; 
+                }
+            }
+            sup{
+                font-size:70%;
+            }
+        }
+        
+        //Scale Bio to a smaller size
+        #Bio{
+            
+        }
+        
+        //Phase 2 stage (bio smaller, lists appear)
+        &.Phase_2{
+            #Patients{
+                opacity: 1;
+            }
+            
+            //Profile hide/show classes
+            &.Profile_1{
+                #Testimonial, #Keypoints{
+                    &.Profile_1{
+                        opacity: 1;
+                    }
+                }
+            }
+            &.Profile_2{
+                #Testimonial, #Keypoints{
+                    &.Profile_2{
+                        opacity: 1;
+                    }
+                }
+            }
+            &.Profile_3{
+                #Testimonial, #Keypoints{
+                    &.Profile_3{
+                        opacity: 1;
+                    }
+                }
+            }
+            &.Profile_4{
+                #Testimonial, #Keypoints{
+                    &.Profile_4{
+                        opacity: 1;
+                    }
+                }
+            }
+            
+        }
+        
     }
 }
 
