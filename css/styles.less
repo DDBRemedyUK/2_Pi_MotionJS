@@ -216,8 +216,18 @@ img{
     height: 1920px;
 }
 
-.no_click{
+.unclickable{
     pointer-events: none;
+}
+
+.close_btn{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: url('../images/close_btn.png') no-repeat;
+    width: 33px;
+    height:32px;
+    cursor: pointer;
 }
 
 //Main body styles
@@ -504,15 +514,7 @@ body{
                         left:55%;
                         z-index: 40;
                         display: none;
-                        .close_btn{
-                            position: absolute;
-                            right: 10px;
-                            top: 10px;
-                            background: url('../images/close_btn.png') no-repeat;
-                            width: 33px;
-                            height:32px;
-                            cursor: pointer;
-                        }
+                        
                     }
                 }
             }
@@ -644,8 +646,33 @@ body{
             }
             
         }
-        
+
     }
+    
+    
+    #IdleModal{
+        position: absolute;
+        z-index: 30;
+        left:50%;
+        top:50%;
+        margin-left:-450px;
+        margin-top:-125px;
+        padding: 30px;
+        width:900px;
+        height: 250px;
+        box-sizing: border-box;
+        background: @w_dark_blue;
+        color: @w_gray;
+        font-size: 30px;
+        text-align: center;
+        opacity: 0.8;
+        .hidden;
+        .g_medium;
+        span{
+            font-size: 50px;
+        }
+    }
+    
 }
 
 

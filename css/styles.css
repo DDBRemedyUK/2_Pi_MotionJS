@@ -167,8 +167,17 @@ img {
   width: 1620px;
   height: 1920px;
 }
-.no_click {
+.unclickable {
   pointer-events: none;
+}
+.close_btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background: url('../images/close_btn.png') no-repeat;
+  width: 33px;
+  height: 32px;
+  cursor: pointer;
 }
 body {
   background: black;
@@ -518,15 +527,6 @@ body #Container #Keypoints ul li div {
   z-index: 40;
   display: none;
 }
-body #Container #Keypoints ul li div .close_btn {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  background: url('../images/close_btn.png') no-repeat;
-  width: 33px;
-  height: 32px;
-  cursor: pointer;
-}
 body #Container section {
   opacity: 0;
   z-index: 1;
@@ -612,4 +612,26 @@ body #Container.Phase_2.Profile_4 #Testimonial.Profile_4,
 body #Container.Phase_2.Profile_4 #Keypoints.Profile_4 {
   opacity: 1;
   z-index: 2;
+}
+body #IdleModal {
+  position: absolute;
+  z-index: 30;
+  left: 50%;
+  top: 50%;
+  margin-left: -450px;
+  margin-top: -125px;
+  padding: 30px;
+  width: 900px;
+  height: 250px;
+  box-sizing: border-box;
+  background: #00131c;
+  color: #cccccc;
+  font-size: 30px;
+  text-align: center;
+  opacity: 0.8;
+  display: none;
+  font-family: 'gotham_medium';
+}
+body #IdleModal span {
+  font-size: 50px;
 }
