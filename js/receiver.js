@@ -125,7 +125,7 @@ window.onload = function() {
                         //}, 3000);
                         
                         
-                        $('#video_container').delay(5000).fadeOut('slow').queue(function(){
+                        $('#video_container').delay(3000).fadeOut('slow').queue(function(){
                             $('#Container').addClass('Phase_2');
                             $('#Bio').addClass('Reduced');
                         });
@@ -144,11 +144,7 @@ window.onload = function() {
                 currentVideo.play();
                 console.log('replay');
             });
-
-            //TODO: gotta format the HTML fade in and out stages to follow the video play. (check CSS)
-
             //NOTE: Main function could continue here, however it will be moved to the bottom as the stand might not be triggered by the motion sensor.
-            //showElements();
         }
     }
 
@@ -190,13 +186,18 @@ window.onload = function() {
                 $('#Container').addClass(switchProfile);
                 $('#Container').addClass('Phase_2');
                 
+                /*$('#Testimonial, #Keypoints').each(function(){
+                    $(this).fadeOut('slow');
+                    $('#Testimonial' + '.' + switchProfile).fadeIn('slow');
+                });*/
                 
                 console.log('#Patients ul li' + '.' +switchProfile);
                 
                 $('#Patients ul li' + '.' +switchProfile).insertAfter('#Patients ul li:last')
                 
-                //NOTE: Fade out BG video source, swap for correctsource and then fade in again (use .delay)
+                $('#BG_source video').attr('src', 'video/' + switchProfile + '_BG.mp4');
                 
+   
             });
         });
         
@@ -212,13 +213,13 @@ window.onload = function() {
             }
         });
     }
+
     
-    //dynamicNav();
-    
+    //Calling our functions
     popupModals();
-    
     patientSwitch();
 
+    
     //MOTION DETECTION EVENTS START HERE
     //FUTURE: Include a counter that gets reset if the counter goes to green (use banner counter as base)
     socket.on('pirstatus', function(data) {
@@ -249,5 +250,15 @@ window.onload = function() {
         }
     });
 
+    //Backup Screen tap function
+    if($('#Container').attr('class') == ''){
+        $('#Container').on('click', function(){
+            console.log('User tapped screen')
+            clearInterval(idleInterval);
+            loadProfile();
+            console.log(currentProfile[0]);
+        });
+    }
+    
     
 }

@@ -529,6 +529,7 @@ body #Container #Keypoints ul li div .close_btn {
 }
 body #Container section {
   opacity: 0;
+  z-index: 1;
   -webkit-transition: all 850ms ease-in-out;
   -moz-transition: all 850ms ease-in-out;
   -o-transition: all 850ms ease-in-out;
@@ -595,16 +596,20 @@ body #Container.Phase_2 #Patients {
 body #Container.Phase_2.Profile_1 #Testimonial.Profile_1,
 body #Container.Phase_2.Profile_1 #Keypoints.Profile_1 {
   opacity: 1;
+  z-index: 2;
 }
 body #Container.Phase_2.Profile_2 #Testimonial.Profile_2,
 body #Container.Phase_2.Profile_2 #Keypoints.Profile_2 {
   opacity: 1;
+  z-index: 2;
 }
 body #Container.Phase_2.Profile_3 #Testimonial.Profile_3,
 body #Container.Phase_2.Profile_3 #Keypoints.Profile_3 {
   opacity: 1;
+  z-index: 2;
 }
 body #Container.Phase_2.Profile_4 #Testimonial.Profile_4,
 body #Container.Phase_2.Profile_4 #Keypoints.Profile_4 {
   opacity: 1;
+  z-index: 2;
 }
