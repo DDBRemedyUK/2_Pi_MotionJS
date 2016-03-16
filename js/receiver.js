@@ -73,7 +73,10 @@ window.onload = function() {
     function loadProfile() {
         if (!profileLoaded) {
             profileLoaded = true;
-
+            
+            //Run Warning modal window
+            warningModal();
+            
             //Add profile class to overall Container
             $('#Container').addClass(currentProfile[0]);
             //Fade screensaver
@@ -105,7 +108,7 @@ window.onload = function() {
                     checkedSecond = true;
                     currentVideo.pause();
                     $('#video_container').addClass('invisible');
-                    $('#video_container').fadeIn('slow', function() {
+                    $('#video_container').fadeOut('slow', function() {
                         console.log('video end');
                         currentVideo.currentTime = 0;//Bring video back to beggining
                         $('#Bio').addClass('faded_in');
@@ -131,9 +134,6 @@ window.onload = function() {
                 $('#video_container').addClass('unclickable');
             });
         }
-        
-        //Run Warning modal window
-         warningModal();
     }
 
     //Modal windows function
@@ -147,14 +147,16 @@ window.onload = function() {
                 console.log($(this).attr('class'));
                 otherModals.fadeOut('slow');
                 $(this).next('div').fadeIn('slow');
-                clearTimer();
+                //clearTimer();
+                resetModalTimer();
             });
         });
 
         //close btn function
         $('.close_btn').on('click', function() {
             $(this).parent('div').fadeOut('slow');
-            clearTimer();
+            //clearTimer();
+            resetModalTimer();
         });
     };
 
@@ -187,7 +189,8 @@ window.onload = function() {
 
                 $('#BG_source video').attr('src', 'video/' + switchProfile + '_BG.mp4');
 
-                clearTimer();
+                //clearTimer();
+                resetModalTimer();
 
             });
         });
@@ -208,49 +211,72 @@ window.onload = function() {
     //Warning timer when user has been idle
     var counter
     var countDown
-    var modalInterval
+    var modalTimeout
     var modalIncrement
+    var modalTimer
+    
     function warningModal() {
         //Check if user has been inactive
-        var modalInterval = setTimeout(modalIncrement, 5000); //Max idle time: 10 seconds
+        //var modalTimeout = setTimeout(modalIncrement, 5000); //Max idle time: 10 seconds
+        function startTimer(){
+            var modalTimeout = setTimeout(
+                function(){
+                    clearTimeout(modalTimeout);
+
+                    modalIncrement();
+
+                }, 20000); //Max idle time: 10 seconds  
+        };
         
         function modalIncrement(){
-            console.log('5 secs have passed');
-            $('#IdleModal').fadeIn('slow', function(){
-                counter = 10;
-                countDown = setInterval(modalTimer, 1000); //1000 will  run it every 1 second
-                function modalTimer() {
-                    counter = counter - 1;
-                    if (counter <= 0) {
-                        //counter ended, do something here
-                        return;
+            
+            if(idleTime == 0){
+                console.log('5 secs have passed');
+                $('#IdleModal').fadeIn('slow', function(){
+                    counter = 20;
+                    countDown = setInterval(modalTimer, 1000); //1000 will  run it every 1 second
+                    function modalTimer() {
+                        counter = counter - 1;
+                        if (counter <= 0) {
+                            //counter ended, do something here
+                            revertEverything();
+                            clearInterval(countDown);
+                            
+                            return;
+                        }
+                        $('.countdown').text(counter);
+                        //Do code for showing the number of seconds here;
+                        console.log(counter);
                     }
-                    $('.countdown').text(counter);
-                    //Do code for showing the number of seconds here;
-                    if (counter == 1) {
-                        //console.log('timer has been completed');
-                        revertEverything();
-                        //counter = 20;
-                        clearInterval(countDown);
-                    }
-                }
-                $('#IdleModal .close_btn').on('click', function(){
-                    resetModalTimer();
                 });
-            });
+                
+                
+                
+                $('#IdleModal .close_btn').on('click', function(){
+                    $('.countdown').text('20');
+                    clearInterval(countDown);
+                    startTimer();
+                });
+                
+                
+            }
+            
+            
         }
+        
+        startTimer();
         
     };
     
     
     function resetModalTimer(){
-        console.log('reset the countdown interval here');
-        clearInterval(countDown);
-        $('.countdown').text('20')
-        modalInterval = setTimeout(modalIncrement, 5000); //Reset max idle time here
+        console.log('Resetting modal timer');
+        $('.countdown').text('20');
+        clearTimeout(modalTimeout);
     }
 
-
+  
+    
     //Revert function to reset to home screens
     function revertEverything() {
 
@@ -263,10 +289,13 @@ window.onload = function() {
         //var countDown = setInterval(timer, 1000);
         
         $('#IdleModal').fadeOut('slow');
+        $('.countdown').text('20');
         
         profileLoaded = false;
         
         //run the revert functions here
+        
+        //Slideshow Restarts
         var idleTime = 1;
         idleInterval = setInterval(timerIncrement, 5000);
         
