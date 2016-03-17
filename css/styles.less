@@ -318,10 +318,20 @@ body{
             position: absolute; 
             //background: #000;
             .ease_slow;
+            &:before{
+                content: url('../images/slideshow_before.png');
+                width: 976px;
+                height:85px;
+                position: absolute;
+                top:25%;
+                left:50%;
+                margin-left: -488px;
+                z-index: 10;
+            }
         }
         
         //Bio container and sections
-        #Bio{
+        #Bio{ 
             width: 585px;
             height:1000px;
             position: absolute;

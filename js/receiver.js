@@ -87,7 +87,9 @@ window.onload = function() {
             $('#BG_source video').attr('src', 'video/' + currentProfile[0] + '_BG.mp4');
             $('#BG_source').addClass('faded_in');
 
-            //dynamicNav();
+            //Bring videos back to start
+            $('video.Profile')[0].pause();
+            $('video.Profile')[0].currentTime = 0;
 
             //Once faded out, play profile introduction video
             var currentVideo = $('#video_container' + ' ' + '#' + currentProfile[0]).get(0)
@@ -118,7 +120,7 @@ window.onload = function() {
             });
             
             //2. Resume video on click
-            $('#video_container').one('click', function(event) {
+            $('#video_container').on('click', function(event) {
                 currentVideo.play();
                 console.log('replay');
                 $('#video_container').addClass('unclickable');
@@ -307,9 +309,10 @@ window.onload = function() {
         $('#Container').removeClass('Phase_2');
         $('#slides_container').attr('style', '');
         $('#video_container').attr('class', '');
+        $('#video_container').removeClass('unclickable');
         $('#video_container').attr('style', '');
         $('#BG_source').attr('class', '');
-        //$('#Bio').attr('class', '');
+        $('#Bio').attr('class', '');
         //$('#Bio').hide();
     }
 
@@ -353,7 +356,7 @@ window.onload = function() {
 
     //Backup Screen tap function
     if ($('#Container').attr('class') == '') {
-        $('#Container').one('click', function() {
+        $('#Container').on('click', function() {
             console.log('User tapped screen')
             clearTimer();
             loadProfile();

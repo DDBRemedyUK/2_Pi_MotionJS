@@ -291,6 +291,16 @@ body #Container #slides_container .slides .item {
   -o-transition: all 1800ms ease-in-out;
   transition: all 1800ms ease-in-out;
 }
+body #Container #slides_container:before {
+  content: url('../images/slideshow_before.png');
+  width: 976px;
+  height: 85px;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  margin-left: -488px;
+  z-index: 10;
+}
 body #Container #Bio {
   width: 585px;
   height: 1000px;
