@@ -23,7 +23,7 @@ console.log("Listening on port " + port);
 /*
  * Instructions:
  * 
-  Sooooo, the lastest Node and Express versions need to be installed in both Raspberry and PCs in order to get this baby working.
+  Sooooo, the latest Node and Express versions need to be installed in both Raspberry and PCs in order to get this baby working.
   The Raspberry Pi also needs to have gpio installed via npm in order to get its pins working.
   
   I'd advise just cloning the contents of the SD card of the raspberry in case more than 1 are needed.

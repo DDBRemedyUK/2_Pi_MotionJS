@@ -297,7 +297,6 @@ body #Container #Bio {
   position: absolute;
   top: 500px;
   left: 0px;
-  opacity: 0;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
@@ -312,11 +311,6 @@ body #Container #Bio:after {
   animation-iteration-count: infinite;
   -webkit-animation-iteration-count: infinite;
   position: absolute;
-}
-body #Container #Bio.Reduced {
-  transform: scale(0.5, 0.5);
-  top: 250px;
-  left: 150px;
 }
 body #Container #Patients {
   background: url(../images/patient_BG.png) no-repeat;
@@ -347,8 +341,7 @@ body #Container #Patients ul {
 }
 body #Container #Patients ul li {
   background: url('../images/Profile_1_BG.jpg') no-repeat;
-  background-size: 810px auto;
-  background-position: -338px -250px;
+  background-size: 100% auto!important;
   width: 99px;
   height: 99px;
   list-style: none;
@@ -365,13 +358,9 @@ body #Container #Patients ul li {
 }
 body #Container #Patients ul li.Profile_1 {
   background: url('../images/Profile_1_BG.jpg') no-repeat;
-  background-size: 810px auto;
-  background-position: -338px -250px;
 }
 body #Container #Patients ul li.Profile_2 {
   background: url('../images/Profile_2_BG.jpg') no-repeat;
-  background-size: 810px auto;
-  background-position: -367px -230px;
 }
 body #Container #Patients ul li.Profile_2:before {
   content: url('../images/patient_sphere_2.png');
@@ -384,13 +373,9 @@ body #Container #Patients ul li.Profile_2:before {
 }
 body #Container #Patients ul li.Profile_3 {
   background: url('../images/Profile_3_BG.jpg') no-repeat;
-  background-size: 810px auto;
-  background-position: -356px -235px;
 }
 body #Container #Patients ul li.Profile_4 {
   background: url('../images/Profile_4_BG.jpg') no-repeat;
-  background-size: 810px auto;
-  background-position: -338px -250px;
 }
 body #Container #Patients ul li.Profile_4:before {
   content: url('../images/patient_sphere_3.png');
@@ -435,7 +420,7 @@ body #Container #Testimonial ul {
 }
 body #Container #Testimonial ul li {
   text-align: center;
-  margin-bottom: 140px;
+  margin-bottom: 100px;
   position: relative;
 }
 body #Container #Testimonial ul li:after {
@@ -449,14 +434,15 @@ body #Container #Testimonial ul li:after {
   animation-iteration-count: infinite;
   -webkit-animation-iteration-count: infinite;
 }
-body #Container #Testimonial ul li:nth-child(1):after {
-  content: url('../images/testimonial_1');
+body #Container #Testimonial ul li:nth-child(1):after,
+body #Container #Testimonial ul li:nth-child(4):after {
+  content: url('../images/testimonial_1.png');
 }
 body #Container #Testimonial ul li:nth-child(2):after {
-  content: url('../images/testimonial_2');
+  content: url('../images/testimonial_2.png');
 }
 body #Container #Testimonial ul li:nth-child(3):after {
-  content: url('../images/testimonial_3');
+  content: url('../images/testimonial_3.png');
   top: -50px;
 }
 body #Container #Keypoints {
@@ -480,7 +466,7 @@ body #Container #Keypoints ul {
 }
 body #Container #Keypoints ul li {
   text-align: center;
-  margin-bottom: 140px;
+  margin-bottom: 100px;
   position: relative;
 }
 body #Container #Keypoints ul li:before {
@@ -494,7 +480,8 @@ body #Container #Keypoints ul li:before {
   animation-iteration-count: infinite;
   -webkit-animation-iteration-count: infinite;
 }
-body #Container #Keypoints ul li:nth-child(1):before {
+body #Container #Keypoints ul li:nth-child(1):before,
+body #Container #Keypoints ul li:nth-child(4):before {
   content: url('../images/keypoint_1.png');
 }
 body #Container #Keypoints ul li:nth-child(2):before {
@@ -586,12 +573,18 @@ body #Container footer ol {
 }
 body #Container footer ol li {
   break-inside: avoid-column;
+  float: left;
 }
 body #Container footer sup {
   font-size: 70%;
 }
 body #Container.Phase_2 #Patients {
   opacity: 1;
+}
+body #Container.Phase_2 #Bio {
+  transform: scale(0.5, 0.5);
+  top: 50px;
+  left: 150px;
 }
 body #Container.Phase_2.Profile_1 #Testimonial.Profile_1,
 body #Container.Phase_2.Profile_1 #Keypoints.Profile_1 {

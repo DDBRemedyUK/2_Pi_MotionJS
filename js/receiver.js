@@ -270,8 +270,6 @@ window.onload = function() {
         clearTimeout(modalTimeout);
         clearInterval(countDown);
         counter = 20;
-        $('video.Profile')[0].pause();
-        $('video.Profile')[0].currentTime = 0;
     }
 
   
