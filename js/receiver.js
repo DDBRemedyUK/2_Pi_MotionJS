@@ -224,7 +224,7 @@ window.onload = function() {
                     clearTimeout(modalTimeout);
                     modalIncrement();
 
-                }, 5000); //Max idle time: 20 seconds (testing)  
+                }, 20000); //Max idle time: 20 seconds (testing)  
         };
         
         function modalIncrement(){
@@ -267,9 +267,11 @@ window.onload = function() {
     function resetModalTimer(){
         console.log('Resetting modal timer');
         $('.countdown').text('20');
-        //clearTimeout(modalTimeout);
-        //clearInterval(countDown);
+        clearTimeout(modalTimeout);
+        clearInterval(countDown);
         counter = 20;
+        $('video.Profile')[0].pause();
+        $('video.Profile')[0].currentTime = 0;
     }
 
   
