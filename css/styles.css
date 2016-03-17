@@ -543,6 +543,13 @@ body #Container #BG_source {
   -o-transition: all 1800ms ease-in-out;
   transition: all 1800ms ease-in-out;
 }
+body #Container #BG_source:after {
+  content: 'Patient stories and cases are fictional';
+  position: absolute;
+  bottom: 250px;
+  left: 50%;
+  margin-left: -140px;
+}
 body #Container.Profile_1 #video_container #Profile_1 {
   opacity: 1;
 }
