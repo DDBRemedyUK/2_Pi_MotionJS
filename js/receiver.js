@@ -224,13 +224,13 @@ window.onload = function() {
                     clearTimeout(modalTimeout);
                     modalIncrement();
 
-                }, 20000); //Max idle time: 20 seconds (testing)  
+                }, 60000); //Max idle time: 20 seconds (testing)  
         };
         
         function modalIncrement(){
             
             if(idleTime == 0){
-                console.log('5 secs have passed');
+                console.log('1 minute passed');
                 $('#IdleModal').fadeIn('slow', function(){
                     counter = 20;
                     countDown = setInterval(modalTimer, 1000); //1000 will  run it every 1 second
@@ -338,7 +338,7 @@ window.onload = function() {
             //FUTURE: Set time out for reverting the main function if the user is inactive for a few minutes. Return to slideshow
 
         } else {
-            console.log('Pi is still')
+            //console.log('Pi is still')
             //document.body.style.backgroundColor = "black";
             //Reset non motion events here after a short time
         }
