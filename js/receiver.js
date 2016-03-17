@@ -101,43 +101,50 @@ window.onload = function() {
 
             currentVideo.addEventListener('timeupdate', function(event) {
                 //console.log(currentVideo.currentTime); 
+                
+                //1. Pause video at second 5
                 if (currentVideo.currentTime >= 5 && !checkedFirst) {
                     checkedFirst = true;
                     currentVideo.pause();
                 }
 
+                //3. End vido after resuming it
                 if (currentVideo.currentTime >= 13 && !checkedSecond) {
                     checkedSecond = true;
                     currentVideo.pause();
-                    $('#video_container').addClass('invisible');
-                    $('#video_container').fadeOut('slow', function() {
-                        console.log('video end');
-                        currentVideo.currentTime = 0;//Bring video back to beggining
-                        $('#Bio').addClass('faded_in');
-                    });
-
-                    //Make Bio smaller, fade rest of the elements after 3 seconds
-                    $('#Bio').fadeIn('slow', function() {
-                        console.log('Bio container animation completed');
-                        $('#video_container').delay(3000).fadeOut('slow').queue(function() {
-                            //$('#video_container').addClass('unclickable');
-                            $('#Container').addClass('Phase_2');
-                            $('#Bio').addClass('Reduced');
-                        });
-                    });
-
+                    console.log('video end');
+                    fadeBio();
                 }
             });
-
-
-            $('#video_container').click(function(event) {
+            
+            //2. Resume video on click
+            $('#video_container').one('click', function(event) {
                 currentVideo.play();
                 console.log('replay');
                 $('#video_container').addClass('unclickable');
             });
+            
         }
     }
 
+    //Fade Bio functions
+    var phase2Timeout
+    
+    function fadeBio(){
+        $('#video_container').fadeOut('slow', function() {
+            $('video.Profile')[0].pause();
+            $('video.Profile')[0].currentTime = 0;
+            $('#Bio').addClass('faded_in');
+            phase2Timeout = setTimeout(phase2, 3000);
+        });
+        
+        function phase2(){
+            clearTimeout(phase2Timeout);
+            console.log('Bio just faded in');
+            $('#Container').addClass('Phase_2');
+        }
+    }
+    
     //Modal windows function
     function popupModals() {
         var popupBtn = $('#Keypoints ul li button');
@@ -208,7 +215,7 @@ window.onload = function() {
         });
     }
 
-    //Warning timer when user has been idle
+    //Warning timer when user has been idle - careful here, Settimeouts and SetIntervals being used, don't want to go full Inception
     var counter
     var countDown
     var modalTimeout
@@ -270,6 +277,7 @@ window.onload = function() {
         clearTimeout(modalTimeout);
         clearInterval(countDown);
         counter = 20;
+        
     }
 
   
@@ -301,10 +309,11 @@ window.onload = function() {
         $('#video_container').attr('class', '');
         $('#video_container').attr('style', '');
         $('#BG_source').attr('class', '');
-        $('#Bio').attr('class', '');
+        //$('#Bio').attr('class', '');
+        //$('#Bio').hide();
     }
 
-
+    //This function clears the screensaver slideshow timer, other functions are set not to trigger if its running
     function clearTimer() {
         clearInterval(idleInterval);
         idleTime = 0;
