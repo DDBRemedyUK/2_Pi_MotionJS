@@ -16,7 +16,6 @@ window.onload = function() {
 
     //Variable to establish which profile to load (MAIN function)
     var loadProfile
-
     video.each(function() {
         var vidID = $(this).attr('id');
 
@@ -25,6 +24,8 @@ window.onload = function() {
         });
     });
 
+    
+    
     //Slideshow
     var idleTime = 1;
     var idleInterval = setInterval(timerIncrement, 5000); // 5 seconds
@@ -38,7 +39,8 @@ window.onload = function() {
         $item.first().addClass('current')
         //console.log($('.current').attr('class'));
     }
-
+    
+    //Global profile variable is defined here
     var currentProfile = $('.current').attr('class').split(' ');
 
     function timerIncrement() {
@@ -194,8 +196,6 @@ window.onload = function() {
 
             });
         });
-
-
     };
 
     //Patient navigation reacts dynamically to overall container class
@@ -222,10 +222,9 @@ window.onload = function() {
             var modalTimeout = setTimeout(
                 function(){
                     clearTimeout(modalTimeout);
-
                     modalIncrement();
 
-                }, 20000); //Max idle time: 10 seconds  
+                }, 5000); //Max idle time: 20 seconds (testing)  
         };
         
         function modalIncrement(){
@@ -241,7 +240,6 @@ window.onload = function() {
                             //counter ended, do something here
                             revertEverything();
                             clearInterval(countDown);
-                            
                             return;
                         }
                         $('.countdown').text(counter);
@@ -250,19 +248,16 @@ window.onload = function() {
                     }
                 });
                 
-                
-                
-                $('#IdleModal .close_btn').on('click', function(){
+                $('#IdleModal .close_btn').one('click', function(){
                     $('.countdown').text('20');
                     clearInterval(countDown);
+                    counter = 20;
+                    
+                    //clearTimeout(modalTimeout);
                     startTimer();
                 });
-                
-                
-            }
-            
-            
-        }
+            };
+        };
         
         startTimer();
         
@@ -272,45 +267,40 @@ window.onload = function() {
     function resetModalTimer(){
         console.log('Resetting modal timer');
         $('.countdown').text('20');
-        clearTimeout(modalTimeout);
+        //clearTimeout(modalTimeout);
+        //clearInterval(countDown);
+        counter = 20;
     }
 
   
     
     //Revert function to reset to home screens
     function revertEverything() {
-
         console.log('Modal timeout completed');
         
-        //$('#IdleModal').attr('style', '');
-        //$('#IdleModal').hide();
-        //clearInterval(countDown);
-        //$('.countdown').text('20');
-        //var countDown = setInterval(timer, 1000);
-        
-        $('#IdleModal').fadeOut('slow');
+        $('#IdleModal').fadeOut('fast');
         $('.countdown').text('20');
         
         profileLoaded = false;
         
         //run the revert functions here
-        
         //Slideshow Restarts
-        var idleTime = 1;
-        idleInterval = setInterval(timerIncrement, 5000);
+        clearInterval(idleInterval);
+        idleTime = 1;
+        idleInterval = setInterval(timerIncrement, 5000); // 5 seconds
         
+        
+        //Bring videos back to start
         $('video.Profile')[0].pause();
         $('video.Profile')[0].currentTime = 0;
         
+        //Hide all shown elements
         $('#Container').attr('class', '');
         $('#Container').removeClass('Phase_2');
         $('#slides_container').attr('style', '');
-
         $('#video_container').attr('class', '');
         $('#video_container').attr('style', '');
-        
         $('#BG_source').attr('class', '');
-
         $('#Bio').attr('class', '');
     }
 
@@ -319,7 +309,7 @@ window.onload = function() {
         clearInterval(idleInterval);
         idleTime = 0;
         console.log(idleTime);
-        console.log('timer cleared');
+        console.log('slideshow timer cleared');
     };
 
     //Calling our functions
@@ -338,11 +328,8 @@ window.onload = function() {
             //Only trigger the main function if the container section does NOT have any class
             if ($('#Container').attr('class') == '') {
                 console.log('Pi says motion was detected')
-
                 clearTimer();
-
                 loadProfile();
-
                 console.log(currentProfile[0]);
             }
 
@@ -351,9 +338,7 @@ window.onload = function() {
         } else {
             console.log('Pi is still')
             //document.body.style.backgroundColor = "black";
-
             //Reset non motion events here after a short time
-
         }
     });
 
