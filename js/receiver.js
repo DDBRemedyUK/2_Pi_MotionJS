@@ -24,7 +24,8 @@ window.onload = function() {
         });
     });
 
-    
+    //Analytics, global session number variable
+    var sessionNo
     
     //Slideshow
     var idleTime = 1;
@@ -76,8 +77,22 @@ window.onload = function() {
         if (!profileLoaded) {
             profileLoaded = true;
             
+            //Analytics: generate random 4 digit number to identify sessions
+            //Generate session number
+            sessionNo = Math.floor(Math.random()*9000) + 1000;
+            
+            sessionNo = 'Session ID: ' + sessionNo + ' ';
+            
+            console.log(sessionNo + 'started');
+            
+            //Analytics identifier
+            ga('send', 'event', 'Main function', 'Motion sensor detected user', sessionNo + 'Main function started on profile: ' + currentProfile[0]);
+            
             //Run Warning modal window
             warningModal();
+            
+            //dynamic nav
+            dynamicNav();
             
             //Add profile class to overall Container
             $('#Container').addClass(currentProfile[0]);
@@ -96,6 +111,7 @@ window.onload = function() {
 
             screenSaver.fadeIn('slow', function() {
                 currentVideo.play();
+                $('#video_container').addClass('unclickable');
             });
             //Stop video at 5 seconds (tap to continue screen)
             var checkedFirst = false;
@@ -108,6 +124,7 @@ window.onload = function() {
                 if (currentVideo.currentTime >= 5 && !checkedFirst) {
                     checkedFirst = true;
                     currentVideo.pause();
+                    $('#video_container').removeClass('unclickable');
                 }
 
                 //3. End vido after resuming it
@@ -124,6 +141,8 @@ window.onload = function() {
                 currentVideo.play();
                 console.log('replay');
                 $('#video_container').addClass('unclickable');
+                //Analytics identifier
+                ga('send', 'event', 'Screen tap', 'User tapped on video pause', sessionNo + 'App proceeds to load Phase 2');
             });
             
         }
@@ -155,11 +174,17 @@ window.onload = function() {
 
         popupBtn.each(function() {
             $(this).on('click', function() {
-                console.log($(this).attr('class'));
+                
+                popupClass = $(this).attr('class');
+                
+                console.log(popupClass);
                 otherModals.fadeOut('slow');
                 $(this).next('div').fadeIn('slow');
                 //clearTimer();
                 resetModalTimer();
+                
+                //Analytics identifier
+                ga('send', 'event', 'Screen tap', 'Modal Popup', sessionNo + 'User chooses to see popup:' + popupClass);
             });
         });
 
@@ -203,6 +228,10 @@ window.onload = function() {
                 //clearTimer();
                 resetModalTimer();
 
+                
+                //Analytics identifier
+                ga('send', 'event', 'Screen tap', 'Profile switch', sessionNo + 'User chooses to navigate to: ' + switchProfile);
+                
             });
         });
     };
@@ -286,8 +315,9 @@ window.onload = function() {
     
     //Revert function to reset to home screens
     function revertEverything() {
-        console.log('Modal timeout completed');
+        console.log('Modal timeout completed, session' + sessionNo + 'ended.');
         
+        //IF anything bugs out on this function just refresh the page (comment everything below this line)
         $('#IdleModal').fadeOut('fast');
         $('.countdown').text('20');
         
@@ -313,7 +343,15 @@ window.onload = function() {
         $('#video_container').attr('style', '');
         $('#BG_source').attr('class', '');
         $('#Bio').attr('class', '');
-        //$('#Bio').hide();
+        
+        //Analytics: renew session Number
+        /*sessionNo = Math.floor(Math.random()*9000) + 1000;
+        sessionNo = 'Session ID: ' + sessionNo + ' ';
+        console.log(sessionNo);*/
+        
+        //IF anything bugs out on this function just refresh the page (comment everything above this line)
+        //location.reload();
+        
     }
 
     //This function clears the screensaver slideshow timer, other functions are set not to trigger if its running

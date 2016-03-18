@@ -524,6 +524,9 @@ body #Container #Keypoints ul li div {
   z-index: 40;
   display: none;
 }
+body #Container #Keypoints ul li div img {
+  max-width: 600px;
+}
 body #Container section {
   opacity: 0;
   z-index: 1;
