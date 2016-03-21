@@ -272,6 +272,10 @@ window.onload = function() {
                 $('#IdleModal').fadeIn('slow', function(){
                     counter = 20;
                     countDown = setInterval(modalTimer, 1000); //1000 will  run it every 1 second
+                    
+                    //Analytics identifier
+                    ga('send', 'event', 'Main function', 'User', sessionNo + 'was idle for long, therefore popup was shown');
+                    
                     function modalTimer() {
                         counter = counter - 1;
                         if (counter <= 0) {
@@ -317,6 +321,9 @@ window.onload = function() {
     function revertEverything() {
         console.log('Modal timeout completed, session' + sessionNo + 'ended.');
         
+        //Analytics identifier
+        ga('send', 'event', 'Main function', 'User', sessionNo + 'went idle and did not return, dropping on profile: ' + currentProfile[0]);
+        
         //IF anything bugs out on this function just refresh the page (comment everything below this line)
         $('#IdleModal').fadeOut('fast');
         $('.countdown').text('20');
@@ -343,6 +350,8 @@ window.onload = function() {
         $('#video_container').attr('style', '');
         $('#BG_source').attr('class', '');
         $('#Bio').attr('class', '');
+        $('#Keypoints ul li div').attr('style', '');
+        
         
         //Analytics: renew session Number
         /*sessionNo = Math.floor(Math.random()*9000) + 1000;
