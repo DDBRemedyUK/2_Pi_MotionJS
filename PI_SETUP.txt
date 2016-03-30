@@ -1,0 +1,83 @@
+PI SET UP
+
+Installation on MAC/PC
+On MAC/PC install node.js
+https://nodejs.org/en/download/
+
+Install Express:
+In terminal/command prompt:
+npm install express
+
+Install Socket IO:
+In terminal/command prompt:
+npm install socket.io
+
+
+Installation on Raspberry PI
+On Raspberry PI install node.js:
+In command prompt:
+install-node
+
+Install Express:
+In command prompt:
+npm install express
+
+Install Socket IO:
+In command prompt:
+npm install socket.io
+
+Install Socket IO Client:
+In command prompt:
+npm install socket.io-client
+
+Install GPIO:
+In command prompt:
+npm install gpio
+
+
+
+Running the Application
+In terminal/command prompt cd project folder.
+In terminal/command prompt:
+node server.js
+
+Will then say Listening on port XXXX
+
+Navigate to localhost: XXXX on browser
+
+
+
+SSH into Raspberry PI
+If you need to SSH into the Raspberry PI:
+In terminal/command prompt:
+ssh pi@10.50.7.83
+
+The IP will change according to the network connection.
+To get the current IP for the Raspberry PI, in command prompt (on PI):
+ifconfig
+
+The network username for the Raspberry PI is:
+PI
+
+The network password for the Raspberry PI is:
+raspberry
+
+The PI_controller.js script which is located on the Raspberry PI desktop needs to have the IP updated to match the IP address of the MAC/PC.
+Once you have connected to the PI via SSH on terminal/command prompt in a new window:
+cd Desktop/2_PI_controller
+
+Once in the directory
+nano PI_controller.js
+to access the file.
+
+Update the socket client IP as needed to match the current IP address of the MAC/PC
+var socket = io.connect('http://10.50.7.37:8080', {reconnect: true});
+
+Once updated you need to save the file
+Ctrl O
+
+Then exit the file
+Ctrl X
+
+Then run socket on the Raspberry PI.
+node PI_controller.js 

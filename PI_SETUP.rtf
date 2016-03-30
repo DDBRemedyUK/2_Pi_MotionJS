@@ -1,0 +1,138 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf340
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red255\green0\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww20360\viewh18800\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\b\fs48 \cf0 \ul \ulc0 PI SET UP
+\b0 \
+
+\b \
+
+\fs36 Installation on MAC/PC\
+
+\b0\fs26 \ulnone On MAC/PC install node.js\
+https://nodejs.org/en/download/\
+\
+Install Express:\
+In terminal/command prompt:\
+
+\b npm install express\
+\
+
+\b0 Install Socket IO:\
+In terminal/command prompt:\
+
+\b npm install socket.io\
+\
+\
+
+\fs36 \ul Installation on Raspberry PI
+\fs26 \ulnone \
+
+\b0 On Raspberry PI install node.js:\
+In command prompt:\
+
+\b install-node
+\b0 \
+\
+Install Express:\
+In command prompt:\
+
+\b npm install express\
+\
+
+\b0 Install Socket IO:\
+In command prompt:\
+
+\b npm install socket.io\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b0 \cf0 Install Socket IO Client:\
+In command prompt:\
+
+\b npm install socket.io-client\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\b0 \cf0 Install GPIO:\
+In command prompt:\
+
+\b npm install gpio\
+\
+\
+\
+
+\fs36 \ul Running the Application\
+
+\b0\fs26 \ulnone In terminal/command prompt cd project folder.\
+In terminal/command prompt:\
+
+\b node server.js\
+\
+
+\b0 Will then say Listening on port \cf2 XXXX\
+\
+\cf0 Navigate to localhost: \cf2 XXXX\cf0  on browser\
+\
+\
+\
+
+\b\fs36 \ul SSH into Raspberry PI\
+
+\fs26 \ulnone If 
+\b0 you need to SSH into the Raspberry PI:\
+In terminal/command prompt:\
+
+\b ssh pi@\cf2 10.50.7.83\
+\
+
+\b0 \cf0 The IP will change according to the network connection.\
+To get the current IP for the Raspberry PI, in command prompt (on PI):\
+
+\b ifconfig\
+\
+
+\b0 The network username for the Raspberry PI is:\
+
+\b PI\
+\
+
+\b0 The network password for the Raspberry PI is:\
+
+\b raspberry\
+\
+
+\b0 The PI_controller.js script which is located on the Raspberry PI desktop needs to have the IP updated to match the IP address of the MAC/PC.\
+Once you have connected to the PI via SSH on terminal/command prompt in a new window:\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\tx7955\pardirnatural\partightenfactor0
+
+\b \cf0 cd Desktop/2_PI_controller
+\b0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+Once in the directory\
+
+\b nano PI_controller.js
+\b0 \
+to access the file.\
+\
+Update the socket client IP as needed to match the current IP address of the MAC/PC\
+
+\b var socket = io.connect('http://\cf2 10.50.7.37:8080\cf0 ', \{reconnect: true\});\
+\
+
+\b0 Once updated you need to save the file\
+
+\b Ctrl O\
+\
+
+\b0 Then exit the file\
+
+\b Ctrl X\
+\
+
+\b0 Then run socket on the Raspberry PI.
+\b \
+node PI_controller.js }
