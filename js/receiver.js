@@ -262,7 +262,7 @@ window.onload = function() {
                     clearTimeout(modalTimeout);
                     modalIncrement();
 
-                }, 60000); //Max idle time: 20 seconds (testing)  
+                }, 300000); //Max idle time: 20 seconds (testing)  
         };
         
         function modalIncrement(){

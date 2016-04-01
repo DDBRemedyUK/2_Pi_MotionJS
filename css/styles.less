@@ -212,8 +212,8 @@ img{
 }
 
 .overall_size{
-    width: 1620px;
-    height: 1920px;
+    width: 1920px;
+    height: 1620px;
 }
 
 .unclickable{
@@ -256,10 +256,13 @@ body{
         .overall_size;
         color: @w_gray;
         //border: solid 1px @w_gray;
-        position: relative;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        margin-left: -960px;
         .block;
-        .center;
         .ease_slow;
+        overflow: hidden;
         //Video container
         #video_container{
             position: absolute;
@@ -335,7 +338,7 @@ body{
             width: 585px;
             height:1000px;
             position: absolute;
-            top:500px;
+            top:400px;
             left:0px;
             //opacity: 0;
             //opacity: 1;
@@ -354,7 +357,7 @@ body{
             height:101px;
             position: absolute;
             right:0px;
-            top:400px;
+            top:550px;
             opacity: 0;
             .ease;
             &:before{
@@ -425,17 +428,17 @@ body{
             .ease;
             font-size:24px;
             width: 480px;
-            padding: 0 12px;
+            padding: 0 12px 0 30px;
             box-sizing: border-box;
             position: absolute;
-            top:900px;
+            top:750px;
             ul{
                 margin:0;
                 padding:0;
                 list-style: none;
                 li{
                     text-align: center;
-                    margin-bottom: 100px;
+                    margin-bottom: 50px;
                     position: relative;
                     &:after{
                         position: absolute;
@@ -462,18 +465,18 @@ body{
             .g_medium;
             font-size:24px;
             width: 500px;
-            padding: 0 12px;
+            padding: 0 30px 0 12px;
             box-sizing: border-box;
             position: absolute;
-            top:900px;
-            right:85px;
+            top:750px;
+            right:100px;
             ul{
                 list-style: none;
                 margin: 0;
                 padding: 0;
                 li{
                     text-align: center;
-                    margin-bottom: 100px;
+                    margin-bottom: 50px;
                     position: relative;
                     &:before{
                         position: absolute;
@@ -509,7 +512,7 @@ body{
                     }
                     div{
                         position: fixed;
-                        top:700px;
+                        top:500px;
                         left:55%;
                         z-index: 40;
                         display: none;
@@ -537,7 +540,7 @@ body{
             &:after{
                 content: 'Patient stories and cases are fictional'; 
                 position: absolute;
-                bottom:250px;
+                bottom:230px;
                 left:50%;
                 margin-left: -140px;
             }
@@ -594,14 +597,25 @@ body{
             position: absolute;
             bottom:10px;
             line-height: 120%;
+            padding: 0 30px;
             z-index: 20;
             ol{
+                counter-reset: foo;
+                display: table;
                 margin:0;
                 padding: 0px;
                 list-style: inside decimal;
                 li{
+                    list-style: none;
+                    counter-increment: foo;
                     break-inside: avoid-column; 
-                    float: left;
+                    display: table-row;
+                    &:before{
+                        content: counter(foo) ".";
+                        display: table-cell;
+                        text-align: left;
+                        padding-right: 0.5em;
+                    }
                 }
             }
             sup{
@@ -617,8 +631,8 @@ body{
             }
             #Bio{
                 transform: scale(0.5,0.5);
-                top: 50px;
-                left: 150px;
+                top: -50px;
+                left: 250px;
             }
             //Profile hide/show classes
             &.Profile_1{
