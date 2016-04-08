@@ -241,10 +241,6 @@ body #Container #video_container {
 body #Container #video_container video {
   width: 1920px;
   height: 1620px;
-  -webkit-transition: all 1800ms ease-in-out;
-  -moz-transition: all 1800ms ease-in-out;
-  -o-transition: all 1800ms ease-in-out;
-  transition: all 1800ms ease-in-out;
 }
 body #Container #video_container video#screensaver {
   z-index: 10;
@@ -270,17 +266,25 @@ body #Container header .preheader {
   -webkit-text-stroke-color: #cccccc;
 }
 body #Container header h1 {
-  font-size: 56px;
+  position: relative;
+  left: -28px;
+  font-size: 53px;
   margin: 0;
+}
+body #Container header h1 span.triangle {
+  position: absolute;
+  top: 6px;
+  width: 44px;
+  height: 44px;
+  background-image: url("../images/7.5mm black triangle whitelines_RGB.svg");
+  background-size: 100% 100%;
+  background-position: left top;
+  background-repeat: no-repeat;
 }
 body #Container #slides_container {
   width: 1920px;
   height: 1620px;
   position: absolute;
-  -webkit-transition: all 1500ms ease-in-out;
-  -moz-transition: all 1500ms ease-in-out;
-  -o-transition: all 1500ms ease-in-out;
-  transition: all 1500ms ease-in-out;
 }
 body #Container #slides_container .slides .current {
   opacity: 1!important;
@@ -522,7 +526,7 @@ body #Container #Keypoints ul li strong {
 }
 body #Container #Keypoints ul li div {
   position: fixed;
-  top: 500px;
+  top: 600px;
   left: 55%;
   z-index: 40;
   display: none;
@@ -581,14 +585,37 @@ body #Container.Profile_4 #Bio {
   background: url('../images/Profile_4_bio.png') no-repeat;
 }
 body #Container footer {
-  column-count: 2;
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+  width: 1860px;
+  height: 200px;
   color: #959595;
   font-size: 12px;
-  position: absolute;
-  bottom: 10px;
   line-height: 120%;
   padding: 0 30px;
   z-index: 20;
+}
+body #Container footer .refs {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  -webkit-column-count: 2;
+  -webkit-transition: all 850ms ease-in-out;
+  -moz-transition: all 850ms ease-in-out;
+  -o-transition: all 850ms ease-in-out;
+  transition: all 850ms ease-in-out;
+  opacity: 0;
+}
+body #Container footer .refScreensaver {
+  -webkit-transition: all 1500ms ease-in-out;
+  -moz-transition: all 1500ms ease-in-out;
+  -o-transition: all 1500ms ease-in-out;
+  transition: all 1500ms ease-in-out;
+  opacity: 1;
+}
+body #Container footer p {
+  margin-top: 0;
 }
 body #Container footer ol {
   counter-reset: foo;
@@ -599,9 +626,11 @@ body #Container footer ol {
 }
 body #Container footer ol li {
   list-style: none;
-  counter-increment: foo;
-  break-inside: avoid-column;
   display: table-row;
+  counter-increment: foo;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 body #Container footer ol li:before {
   content: counter(foo) ".";
@@ -609,8 +638,34 @@ body #Container footer ol li:before {
   text-align: left;
   padding-right: 0.5em;
 }
-body #Container footer sup {
+body #Container footer ol.footnote {
+  counter-reset: fum;
+  list-style: inside lower-alpha;
+}
+body #Container footer ol.footnote li {
+  counter-increment: fum;
+}
+body #Container footer ol.footnote li:before {
+  position: relative;
+  top: -3px;
   font-size: 70%;
+  content: counter(fum, lower-alpha);
+}
+body #Container footer sup {
+  position: relative;
+  top: -3px;
+  font-size: 70%;
+}
+body #Container footer span.triangle {
+  position: relative;
+  top: 1px;
+  width: 11px;
+  height: 11px;
+  background-image: url("../images/7.5mm black triangle whitelines_RGB.svg");
+  background-size: 100% 100%;
+  background-position: left top;
+  background-repeat: no-repeat;
+  display: inline-block;
 }
 body #Container.Phase_2 #Patients {
   opacity: 1;
@@ -621,24 +676,40 @@ body #Container.Phase_2 #Bio {
   left: 250px;
 }
 body #Container.Phase_2.Profile_1 #Testimonial.Profile_1,
-body #Container.Phase_2.Profile_1 #Keypoints.Profile_1 {
+body #Container.Phase_2.Profile_1 #Keypoints.Profile_1,
+body #Container.Phase_2.Profile_1 .refs.Profile_1 {
   opacity: 1;
   z-index: 2;
 }
 body #Container.Phase_2.Profile_2 #Testimonial.Profile_2,
-body #Container.Phase_2.Profile_2 #Keypoints.Profile_2 {
+body #Container.Phase_2.Profile_2 #Keypoints.Profile_2,
+body #Container.Phase_2.Profile_2 .refs.Profile_2 {
   opacity: 1;
   z-index: 2;
 }
 body #Container.Phase_2.Profile_3 #Testimonial.Profile_3,
-body #Container.Phase_2.Profile_3 #Keypoints.Profile_3 {
+body #Container.Phase_2.Profile_3 #Keypoints.Profile_3,
+body #Container.Phase_2.Profile_3 .refs.Profile_3 {
   opacity: 1;
   z-index: 2;
 }
 body #Container.Phase_2.Profile_4 #Testimonial.Profile_4,
-body #Container.Phase_2.Profile_4 #Keypoints.Profile_4 {
+body #Container.Phase_2.Profile_4 #Keypoints.Profile_4,
+body #Container.Phase_2.Profile_4 .refs.Profile_4 {
   opacity: 1;
   z-index: 2;
+}
+body #Container.Profile_1 .refScreensaver {
+  opacity: 0;
+}
+body #Container.Profile_2 .refScreensaver {
+  opacity: 0;
+}
+body #Container.Profile_3 .refScreensaver {
+  opacity: 0;
+}
+body #Container.Profile_4 .refScreensaver {
+  opacity: 0;
 }
 body #IdleModal {
   position: absolute;

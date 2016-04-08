@@ -11,11 +11,11 @@ window.onload = function() {
     //VIDEO FUNCTIONS DEFINED HERE
     //NOTE: store the needed video frame times in variables, use those across the script
     //NOTE: video ID's set in variables too
-    var video = $('video');
-    var screenSaver = $('#slides_container');
+    var video = $('video'),
+        screenSaver = $('#slides_container'),
+        //Variable to establish which profile to load (MAIN function)
+        loadProfile;
 
-    //Variable to establish which profile to load (MAIN function)
-    var loadProfile
     video.each(function() {
         var vidID = $(this).attr('id');
 
@@ -25,22 +25,20 @@ window.onload = function() {
     });
 
     //Analytics, global session number variable
-    var sessionNo
-    
+    var sessionNo,
     //Slideshow
-    var idleTime = 1;
-    var idleInterval = setInterval(timerIncrement, 5000); // 5 seconds
+        idleTime = 1,
+        idleInterval = setInterval(timerIncrement, 5000); // 5 seconds
+        $t = $('.slides'),
+        $item = $t.children().addClass('item');
 
-    var $t = $('.slides'),
-        $item = $t.children().addClass('item')
-
-        $t.addClass('rotator');
+    $t.addClass('rotator');
 
     if ($item.length > 1) {
         $item.first().addClass('current')
         //console.log($('.current').attr('class'));
     }
-    
+
     //Global profile variable is defined here
     var currentProfile = $('.current').attr('class').split(' ');
 
@@ -93,7 +91,7 @@ window.onload = function() {
             
             //dynamic nav
             dynamicNav();
-            
+
             //Add profile class to overall Container
             $('#Container').addClass(currentProfile[0]);
             //Fade screensaver
@@ -107,12 +105,14 @@ window.onload = function() {
             $('video.Profile')[0].currentTime = 0;
 
             //Once faded out, play profile introduction video
-            var currentVideo = $('#video_container' + ' ' + '#' + currentProfile[0]).get(0)
+            var currentVideo = $('#video_container' + ' ' + '#' + currentProfile[0]).get(0);
+            console.log(currentVideo);
 
             screenSaver.fadeIn('slow', function() {
                 currentVideo.play();
                 $('#video_container').addClass('unclickable');
             });
+
             //Stop video at 5 seconds (tap to continue screen)
             var checkedFirst = false;
             var checkedSecond = false;
@@ -137,7 +137,7 @@ window.onload = function() {
             });
             
             //2. Resume video on click
-            $('#video_container').on('click', function(event) {
+            $('#video_container').one('click', function(event) {
                 currentVideo.play();
                 console.log('replay');
                 $('#video_container').addClass('unclickable');
@@ -149,16 +149,23 @@ window.onload = function() {
     }
 
     //Fade Bio functions
-    var phase2Timeout
+    var phase2Timeout;
     
     function fadeBio(){
-        $('#video_container').fadeOut('slow', function() {
+        /*$('#video_container').fadeOut('slow', function() {
             $('video.Profile')[0].pause();
             $('video.Profile')[0].currentTime = 0;
             $('#Bio').addClass('faded_in');
+            //Fade in patient refs
+           //$(".refsPatient").fadeIn('slow');
             phase2Timeout = setTimeout(phase2, 3000);
-        });
-        
+        });*/
+        $('#video_container').hide();
+        $('video.Profile')[0].pause();
+        $('video.Profile')[0].currentTime = 0;
+        $('#Bio').addClass('faded_in');
+        phase2Timeout = setTimeout(phase2, 3000);
+
         function phase2(){
             clearTimeout(phase2Timeout);
             console.log('Bio just faded in');
@@ -174,7 +181,6 @@ window.onload = function() {
 
         popupBtn.each(function() {
             $(this).on('click', function() {
-                
                 popupClass = $(this).attr('class');
                 
                 console.log(popupClass);
@@ -247,28 +253,40 @@ window.onload = function() {
     }
 
     //Warning timer when user has been idle - careful here, Settimeouts and SetIntervals being used, don't want to go full Inception
-    var counter
-    var countDown
-    var modalTimeout
-    var modalIncrement
-    var modalTimer
+    var counter,
+        countDown,
+        modalTimeout,
+        modalIncrement,
+        modalTimer;
     
     function warningModal() {
         //Check if user has been inactive
         //var modalTimeout = setTimeout(modalIncrement, 5000); //Max idle time: 10 seconds
         function startTimer(){
-            var modalTimeout = setTimeout(
+            modalTimeout = setTimeout(
                 function(){
                     clearTimeout(modalTimeout);
+                    if (modalTimeout == null){
+                        console.log('timer has cleared');
+                    }
                     modalIncrement();
 
-                }, 300000); //Max idle time: 20 seconds (testing)  
+                }, 30000); //Max idle time: 3 minutes(180000) or 5 minutes (300000)
+            $('body').on('click', function(){
+                clearTimeout(modalTimeout);
+                if (modalTimeout == null) {
+                        console.log('timer has reset');
+                }
+                startTimer();
+            });
         };
         
         function modalIncrement(){
             
             if(idleTime == 0){
                 console.log('1 minute passed');
+                $('#Container').addClass('unclickable');
+                $('body').off('click');
                 $('#IdleModal').fadeIn('slow', function(){
                     counter = 20;
                     countDown = setInterval(modalTimer, 1000); //1000 will  run it every 1 second
@@ -291,6 +309,7 @@ window.onload = function() {
                 });
                 
                 $('#IdleModal .close_btn').one('click', function(){
+                    $('#Container').removeClass('unclickable');
                     $('.countdown').text('20');
                     clearInterval(countDown);
                     counter = 20;
@@ -300,9 +319,9 @@ window.onload = function() {
                 });
             };
         };
-        
+
         startTimer();
-        
+
     };
     
     
@@ -340,6 +359,14 @@ window.onload = function() {
         //Bring videos back to start
         $('video.Profile')[0].pause();
         $('video.Profile')[0].currentTime = 0;
+        $('video').each(function() {
+            if ( $('video')[0].currentTime == 0) {
+                console.log('videos have reset');
+            } else {
+                console.log('videos have NOT reset');
+            }
+        });
+        
         
         //Hide all shown elements
         $('#Container').attr('class', '');
@@ -361,7 +388,7 @@ window.onload = function() {
         //IF anything bugs out on this function just refresh the page (comment everything above this line)
         //location.reload();
         
-    }
+    };
 
     //This function clears the screensaver slideshow timer, other functions are set not to trigger if its running
     function clearTimer() {
@@ -402,7 +429,7 @@ window.onload = function() {
     });
 
     //Backup Screen tap function
-    if ($('#Container').attr('class') == '') {
+    if ($('#Container').attr('class') == "") {
         $('#Container').on('click', function() {
             console.log('User tapped screen')
             clearTimer();

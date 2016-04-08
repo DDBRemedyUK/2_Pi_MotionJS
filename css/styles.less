@@ -271,7 +271,7 @@ body{
             .ease;
             video{
                 .overall_size;
-                .ease_slower;
+                //.ease_slower;
                 &#screensaver{
                     z-index: 10;
                 }
@@ -296,8 +296,20 @@ body{
                 .outlined_font;
             }
             h1{
-                font-size: 56px;
+                position: relative;
+                left: -28px;
+                font-size: 53px;
                 margin:0;
+                span.triangle {
+                    position: absolute;
+                    top: 6px;
+                    width: 44px;
+                    height: 44px;
+                    background-image: url("../images/7.5mm black triangle whitelines_RGB.svg");
+                    background-size: 100% 100%;
+                    background-position: left top;
+                    background-repeat: no-repeat;
+                }
             }
         }
         
@@ -320,7 +332,6 @@ body{
             .overall_size;
             position: absolute; 
             //background: #000;
-            .ease_slow;
             &:before{
                 content: url('../images/slideshow_before.png');
                 width: 976px;
@@ -512,7 +523,7 @@ body{
                     }
                     div{
                         position: fixed;
-                        top:500px;
+                        top:600px;
                         left:55%;
                         z-index: 40;
                         display: none;
@@ -591,14 +602,31 @@ body{
         
         //Main footer
         footer{
-            column-count: 2;
+            position: absolute;
+            left:0;
+            bottom:10px;
+            width:1860px;
+            height:200px;
             color: @w_darkgray;
             font-size: 12px;
-            position: absolute;
-            bottom:10px;
             line-height: 120%;
             padding: 0 30px;
             z-index: 20;
+            .refs {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                -webkit-column-count: 2;
+                .ease;
+                opacity:0;
+            }
+            .refScreensaver{
+                .ease_slow;
+                opacity: 1;
+            }
+            p{
+                margin-top: 0;
+            }
             ol{
                 counter-reset: foo;
                 display: table;
@@ -607,9 +635,11 @@ body{
                 list-style: inside decimal;
                 li{
                     list-style: none;
-                    counter-increment: foo;
-                    break-inside: avoid-column; 
                     display: table-row;
+                    counter-increment: foo;
+                    -webkit-column-break-inside: avoid;
+                    page-break-inside: avoid;
+                    break-inside: avoid;
                     &:before{
                         content: counter(foo) ".";
                         display: table-cell;
@@ -617,14 +647,40 @@ body{
                         padding-right: 0.5em;
                     }
                 }
+                &.footnote{
+                    counter-reset:fum;
+                    list-style: inside lower-alpha;
+                    li{
+                        counter-increment: fum;
+                        &:before{
+                            position: relative;
+                            top: -3px;
+                            font-size: 70%;
+                            content: counter(fum, lower-alpha);
+                        }
+                    }
+                }
             }
             sup{
+                position: relative;
+                top: -3px;
                 font-size:70%;
+            }
+            span.triangle{
+                position: relative;
+                top: 1px;
+                width: 11px;
+                height: 11px;
+                background-image: url("../images/7.5mm black triangle whitelines_RGB.svg");
+                background-size: 100% 100%;
+                background-position: left top;
+                background-repeat: no-repeat;
+                display: inline-block;
             }
         }
         
         
-        //Phase 2 stage (bio smaller, lists appear)
+        //Phase 2 stage (bio smaller, lists and refs appear)
         &.Phase_2{
             #Patients{
                 opacity: 1;
@@ -636,7 +692,7 @@ body{
             }
             //Profile hide/show classes
             &.Profile_1{
-                #Testimonial, #Keypoints{
+                #Testimonial, #Keypoints, .refs{
                     &.Profile_1{
                         opacity: 1;
                         z-index: 2;
@@ -644,7 +700,7 @@ body{
                 }
             }
             &.Profile_2{
-                #Testimonial, #Keypoints{
+                #Testimonial, #Keypoints, .refs{
                     &.Profile_2{
                         opacity: 1;
                         z-index: 2;
@@ -652,7 +708,7 @@ body{
                 }
             }
             &.Profile_3{
-                #Testimonial, #Keypoints{
+                #Testimonial, #Keypoints, .refs{
                     &.Profile_3{
                         opacity: 1;
                         z-index: 2;
@@ -660,7 +716,7 @@ body{
                 }
             }
             &.Profile_4{
-                #Testimonial, #Keypoints{
+                #Testimonial, #Keypoints, .refs{
                     &.Profile_4{
                         opacity: 1;
                         z-index: 2;
@@ -670,6 +726,27 @@ body{
             
         }
 
+        //Pre-Phase 2 fade out screensaver refs & slides
+        &.Profile_1{
+            .refScreensaver{
+                opacity: 0;
+            }
+        }
+        &.Profile_2{
+            .refScreensaver{
+                opacity: 0;
+            }
+        }
+        &.Profile_3{
+            .refScreensaver{
+                opacity: 0;
+            }
+        }
+        &.Profile_4{
+            .refScreensaver{
+                opacity: 0;
+            }
+        }
     }
     
     

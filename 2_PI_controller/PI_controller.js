@@ -1,5 +1,5 @@
 var io = require('socket.io-client');
-var socket = io.connect('http://10.50.7.37:8080', {reconnect: true}); //Change IP here
+var socket = io.connect('http://10.50.7.32:8080', {reconnect: true}); //Change IP here
 
 socket.emit('pirstatus', false);
 
