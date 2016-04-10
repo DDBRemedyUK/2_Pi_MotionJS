@@ -31,7 +31,7 @@ ga(function(tracker) {
 
 <body>
    
-    <section id="Container" class=""> <!--insert Phase_2 class here-->
+    <section id="Container"> <!--insert Phase_2 class here-->
         <!--Slideshow container-->
         <div id="slides_container">
             <div class="slides">
@@ -43,7 +43,7 @@ ga(function(tracker) {
         </div>
        
         <!--video section: both 'screensaver' and transition profile videos load here-->
-        <div id="video_container" class="">
+        <div id="video_container">
             <video class="Profile" id="Profile_1">
                 <source src="video/Profile_1.mp4" type="video/mp4">
             </video>
@@ -99,7 +99,7 @@ ga(function(tracker) {
                     without cirrhosis treated with 8-week 
                     HARVONI (n=558)<sup>1–4,a,b</sup>
                     <button class="P1_popup_1"></button>
-                    <div class="P1_popup_1">
+                    <div class="P1_popup_1 patientPopup">
                         <img src="/images/Profile_1_popup_1.jpg">
                         <span class="close_btn"></span>
                     </div>
@@ -111,7 +111,7 @@ ga(function(tracker) {
                     was observed in real-world patients 
                     treated with 8-week HARVONI<sup>3,d</sup>
                     <button class="P1_popup_2"></button>
-                    <div class="P1_popup_2">
+                    <div class="P1_popup_2 patientPopup">
                         <img src="/images/Profile_1_popup_2.jpg">
                         <span class="close_btn"></span>
                     </div>
@@ -121,7 +121,7 @@ ga(function(tracker) {
                     seen in real-world patients treated 
                     with<br>8-week HARVONI<sup>1–4</sup>
                     <button class="P1_popup_3"></button>
-                    <div class="P1_popup_3">
+                    <div class="P1_popup_3 patientPopup">
                         <img src="/images/Profile_1_popup_3.jpg">
                         <span class="close_btn"></span>
                     </div>
@@ -149,7 +149,7 @@ ga(function(tracker) {
                 <li>
                     Up to <strong>100% cure</strong> in real-world HIV/HCV-coinfected patients treated with HARVONI for 8 weeks<sup>1,a,b</sup>
                     <button class="P2_popup_1"></button>
-                    <div class="P2_popup_1">
+                    <div class="P2_popup_1 patientPopup">
                         <img src="/images/Profile_2_popup_1.jpg">
                         <span class="close_btn"></span>
                     </div>
@@ -157,7 +157,7 @@ ga(function(tracker) {
                 <li>
                     HARVONI can be <strong>coadministered with all</strong> classes of HIV<br>antiviral agents<sup>2,c</sup>
                     <button class="P2_popup_2"></button>
-                    <div class="P2_popup_2">
+                    <div class="P2_popup_2 patientPopup">
                         <img src="/images/Profile_2_popup_2.jpg">
                         <span class="close_btn"></span>
                     </div>
@@ -165,7 +165,7 @@ ga(function(tracker) {
                 <li>
                     HARVONI is <strong>well-tolerated;</strong> up to 100% of real-world patients completed 8-week therapy<br>with HARVONI<sup>1,3,4,d</sup>
                     <button class="P2_popup_3"></button>
-                    <div class="P2_popup_3">
+                    <div class="P2_popup_3 patientPopup">
                         <img src="/images/Profile_2_popup_3.jpg">
                         <span class="close_btn"></span>
                     </div>
@@ -196,7 +196,7 @@ ga(function(tracker) {
                 <li>
                     8-week HARVONI achieved high cure rates in real-world patients, <strong>regardless of GT1 subtype</strong><sup>1–4,a,b</sup>
                     <button class="P3_popup_1"></button>
-                    <div class="P3_popup_1">
+                    <div class="P3_popup_1 patientPopup">
                         <img src="/images/Profile_3_popup_1.jpg">
                         <span class="close_btn"></span>
                     </div>
@@ -204,7 +204,7 @@ ga(function(tracker) {
                 <li>
                     In clinical practice, 8-week HARVONI was <strong>as effective</strong> as 12-week treatment in eligible patients<sup>1,a</sup>
                     <button class="P3_popup_2"></button>
-                    <div class="P3_popup_2">
+                    <div class="P3_popup_2 patientPopup">
                         <img src="/images/Profile_3_popup_2.jpg">
                         <span class="close_btn"></span>
                     </div>
@@ -212,7 +212,7 @@ ga(function(tracker) {
                 <li>
                     Up to 100% cure rates were seen in real-world patients with a range<br>of comorbidities<sup>3</sup>
                     <button class="P3_popup_3"></button>
-                    <div class="P3_popup_3">
+                    <div class="P3_popup_3 patientPopup">
                         <img src="/images/Profile_3_popup_3.jpg">
                         <span class="close_btn"></span>
                     </div>
@@ -220,7 +220,7 @@ ga(function(tracker) {
                 <li>
                     Coadministration of HARVONI with acid-reducing agents is not contraindicated.<sup>5</sup> In order to ensure maximum absorption of the active components of HARVONI, it is important to adhere to the recommended dosage timings.<sup>5</sup>
                     <button class="P3_popup_4"></button>
-                    <div class="P3_popup_4">
+                    <div class="P3_popup_4 patientPopup">
                         <img src="/images/Profile_3_popup_4.jpg">
                         <span class="close_btn"></span>
                     </div>
@@ -248,7 +248,7 @@ ga(function(tracker) {
                 <li>
                     8-week treatment with HARVONI resulted in consistently high cure rates in patients <strong>without cirrhosis, regardless of fibrosis score</strong><sup>1,a,b</sup>
                     <button class="P3_popup_1"></button>
-                    <div class="P3_popup_1">
+                    <div class="P3_popup_1 patientPopup">
                         <img src="/images/Profile_4_popup_1.jpg">
                         <span class="close_btn"></span>
                     </div>
@@ -256,7 +256,7 @@ ga(function(tracker) {
                 <li>
                     <strong>No dose adjustment</strong> is required<br>when coadministering HARVONI<br>with narcotics<sup>2,c</sup>
                     <button class="P3_popup_2"></button>
-                    <div class="P3_popup_2">
+                    <div class="P3_popup_2 patientPopup">
                         <img src="/images/Profile_4_popup_2.jpg">
                         <span class="close_btn"></span>
                     </div>
@@ -264,7 +264,7 @@ ga(function(tracker) {
                 <li>
                     <strong>96% treatment adherence</strong> was observed in real-world patients treated with 8-week HARVONI<sup>3,d</sup>
                     <button class="P3_popup_3"></button>
-                    <div class="P3_popup_3">
+                    <div class="P3_popup_3 patientPopup">
                         <img src="/images/Profile_4_popup_3.jpg">
                         <span class="close_btn"></span>
                     </div>

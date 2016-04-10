@@ -53,7 +53,7 @@ window.onload = function() {
             $item.first().addClass('current')
         } else {
             c.removeClass('current').next().addClass('current')
-        };
+        }
         //console.log($('.current').attr('class'));
         currentProfile = $('.current').attr('class').split(' ');
 
@@ -66,10 +66,11 @@ window.onload = function() {
         } else if (currentProfile[0] == 'Profile_4') {
             console.log('go to profile 4');
         }
-    }
+    };
 
     //NOTE: creating global variable to be used as a closure to avoid the event firing more than once.
-    var profileLoaded;
+    var profileLoaded,
+        currentVideo;
 
     function loadProfile() {
         if (!profileLoaded) {
@@ -143,6 +144,9 @@ window.onload = function() {
                 $('#video_container').addClass('unclickable');
                 //Analytics identifier
                 ga('send', 'event', 'Screen tap', 'User tapped on video pause', sessionNo + 'App proceeds to load Phase 2');
+                /*currentVideo.addEventListener('timeupdate', function(event) {
+                    console.log(currentVideo.currentTime);
+                });*/
             });
             
         }
@@ -152,17 +156,9 @@ window.onload = function() {
     var phase2Timeout;
     
     function fadeBio(){
-        /*$('#video_container').fadeOut('slow', function() {
-            $('video.Profile')[0].pause();
-            $('video.Profile')[0].currentTime = 0;
-            $('#Bio').addClass('faded_in');
-            //Fade in patient refs
-           //$(".refsPatient").fadeIn('slow');
-            phase2Timeout = setTimeout(phase2, 3000);
-        });*/
         $('#video_container').hide();
-        $('video.Profile')[0].pause();
-        $('video.Profile')[0].currentTime = 0;
+        $('#video_container ' + '#' + currentProfile[0]).get(0).pause();
+        $('#video_container ' + '#' + currentProfile[0]).get(0).currentTime = 0;
         $('#Bio').addClass('faded_in');
         phase2Timeout = setTimeout(phase2, 3000);
 
@@ -186,7 +182,6 @@ window.onload = function() {
                 console.log(popupClass);
                 otherModals.fadeOut('slow');
                 $(this).next('div').fadeIn('slow');
-                //clearTimer();
                 resetModalTimer();
                 
                 //Analytics identifier
@@ -195,9 +190,8 @@ window.onload = function() {
         });
 
         //close btn function
-        $('.close_btn').on('click', function() {
+        $('.patientPopup .close_btn').on('click', function() {
             $(this).parent('div').fadeOut('slow');
-            //clearTimer();
             resetModalTimer();
         });
     };
@@ -220,16 +214,12 @@ window.onload = function() {
                 $('#Container').addClass(switchProfile);
                 $('#Container').addClass('Phase_2');
 
-                /*$('#Testimonial, #Keypoints').each(function(){
-                    $(this).fadeOut('slow');
-                    $('#Testimonial' + '.' + switchProfile).fadeIn('slow');
-                });*/
-
                 console.log('#Patients ul li' + '.' + switchProfile);
 
                 $('#Patients ul li' + '.' + switchProfile).insertAfter('#Patients ul li:last')
 
                 $('#BG_source video').attr('src', 'video/' + switchProfile + '_BG.mp4');
+                $('.patientPopup').fadeOut('slow');
 
                 //clearTimer();
                 resetModalTimer();
@@ -263,76 +253,74 @@ window.onload = function() {
         //Check if user has been inactive
         //var modalTimeout = setTimeout(modalIncrement, 5000); //Max idle time: 10 seconds
         function startTimer(){
-            modalTimeout = setTimeout(
-                function(){
+            modalTimeout = setTimeout(function() {
                     clearTimeout(modalTimeout);
+                    modalTimeout = null;
                     if (modalTimeout == null){
-                        console.log('timer has cleared');
+                        console.log('timer has finished');
+                        modalIncrement();
+                    } else {
+                        console.log('timer is still running');
                     }
-                    modalIncrement();
-
-                }, 30000); //Max idle time: 3 minutes(180000) or 5 minutes (300000)
-            $('body').on('click', function(){
-                clearTimeout(modalTimeout);
-                if (modalTimeout == null) {
-                        console.log('timer has reset');
-                }
-                startTimer();
-            });
+            }, 180000); //Max idle time: 3 minutes(180000) or 5 minutes (300000)
         };
         
         function modalIncrement(){
             
             if(idleTime == 0){
-                console.log('1 minute passed');
+                console.log('5 minutes passed');
                 $('#Container').addClass('unclickable');
-                $('body').off('click');
                 $('#IdleModal').fadeIn('slow', function(){
                     counter = 20;
                     countDown = setInterval(modalTimer, 1000); //1000 will  run it every 1 second
                     
                     //Analytics identifier
                     ga('send', 'event', 'Main function', 'User', sessionNo + 'was idle for long, therefore popup was shown');
-                    
-                    function modalTimer() {
-                        counter = counter - 1;
-                        if (counter <= 0) {
-                            //counter ended, do something here
-                            revertEverything();
-                            clearInterval(countDown);
-                            return;
-                        }
-                        $('.countdown').text(counter);
-                        //Do code for showing the number of seconds here;
-                        console.log(counter);
-                    }
                 });
-                
-                $('#IdleModal .close_btn').one('click', function(){
-                    $('#Container').removeClass('unclickable');
-                    $('.countdown').text('20');
-                    clearInterval(countDown);
-                    counter = 20;
-                    
-                    //clearTimeout(modalTimeout);
-                    startTimer();
-                });
-            };
+            }
         };
 
         startTimer();
 
     };
-    
-    
-    function resetModalTimer(){
-        console.log('Resetting modal timer');
-        $('.countdown').text('20');
+
+
+    //This function fires when modal timer has finished
+    function modalTimer() {
+        counter = counter - 1;
+        if (counter <= 0) {
+            //counter ended, do something here
+            clearInterval(countDown);
+            revertEverything();
+            return;
+        }
+        $('.countdown').text(counter);
+        //Do code for showing the number of seconds here;
+        console.log(counter);
+    };
+
+    //function for modal close button
+    $('#IdleModal .close_btn').one('click', function() {
+        console.log('modal close btn clicked');
+        $(this).parent('div').fadeOut('slow', function() {
+            $('#Container').removeClass('unclickable');
+            $('.countdown').text('20');
+            clearInterval(countDown);
+            counter = 20;
+            resetModalTimer();
+        });
+    });
+
+    function resetModalTimer() {
         clearTimeout(modalTimeout);
-        clearInterval(countDown);
-        counter = 20;
-        
-    }
+        modalTimeout = null;
+        if (modalTimeout == null){
+            console.log('Resetting modal timer');
+            warningModal();
+        } else {
+            console.log('TIMER IS STILL RUNNING!!! h');
+        }
+    };
 
   
     
@@ -357,8 +345,8 @@ window.onload = function() {
         
         
         //Bring videos back to start
-        $('video.Profile')[0].pause();
-        $('video.Profile')[0].currentTime = 0;
+        $('#video_container ' + '#' + currentProfile[0]).get(0).pause();
+        $('#video_container ' + '#' + currentProfile[0]).get(0).currentTime = 0;
         $('video').each(function() {
             if ( $('video')[0].currentTime == 0) {
                 console.log('videos have reset');
@@ -369,15 +357,11 @@ window.onload = function() {
         
         
         //Hide all shown elements
-        $('#Container').attr('class', '');
-        $('#Container').removeClass('Phase_2');
-        $('#slides_container').attr('style', '');
-        $('#video_container').attr('class', '');
-        $('#video_container').removeClass('unclickable');
-        $('#video_container').attr('style', '');
-        $('#BG_source').attr('class', '');
-        $('#Bio').attr('class', '');
-        $('#Keypoints ul li div').attr('style', '');
+        //$('#Container').removeClass('Phase_2');
+        $('#slides_container').removeAttr('style');
+        $('#video_container').removeAttr('class unclickable style');
+        $('#Container, #BG_source, #Bio').removeAttr('class');
+        $('#Keypoints ul li div').removeAttr('style');
         
         
         //Analytics: renew session Number
@@ -412,7 +396,7 @@ window.onload = function() {
             //Clear timer in slideshow so it stops on selected profile
 
             //Only trigger the main function if the container section does NOT have any class
-            if ($('#Container').attr('class') == '') {
+            if (!$('#Container').attr('class')) {
                 console.log('Pi says motion was detected')
                 clearTimer();
                 loadProfile();
@@ -429,14 +413,14 @@ window.onload = function() {
     });
 
     //Backup Screen tap function
-    if ($('#Container').attr('class') == "") {
-        $('#Container').on('click', function() {
+    $('#Container').on('click', function() {
+        if (!$('#Container').attr('class')) {
             console.log('User tapped screen')
             clearTimer();
             loadProfile();
             console.log(currentProfile[0]);
-        });
-    }
+        }
+    });
 
 
 
