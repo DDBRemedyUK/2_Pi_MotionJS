@@ -523,7 +523,7 @@ body{
                     }
                     div{
                         position: fixed;
-                        top:600px;
+                        top:480px;
                         left:55%;
                         z-index: 40;
                         display: none;
@@ -586,6 +586,7 @@ body{
             }
             #Bio{
                 background: url('../images/Profile_3_bio.png') no-repeat;
+                top: -40px;
             }
         }
         &.Profile_4{
@@ -687,9 +688,10 @@ body{
             }
             #Bio{
                 transform: scale(0.5,0.5);
-                top: -50px;
+                top: -40px;
                 left: 250px;
             }
+
             //Profile hide/show classes
             &.Profile_1{
                 #Testimonial, #Keypoints, .refs{
@@ -697,6 +699,12 @@ body{
                         opacity: 1;
                         z-index: 2;
                     }
+                        ul li div.P1_popup_1 {
+                            left: 50%;
+                            img {
+                                max-width: 800px;
+                            }
+                        }
                 }
             }
             &.Profile_2{
@@ -748,8 +756,7 @@ body{
             }
         }
     }
-    
-    
+
     #IdleModal{
         position: absolute;
         z-index: 30;
@@ -774,5 +781,3 @@ body{
     }
     
 }
-
-

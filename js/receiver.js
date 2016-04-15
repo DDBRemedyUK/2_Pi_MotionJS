@@ -8,6 +8,56 @@ window.onload = function() {
         console.log("Connected!");
     });
 
+    //Function to disable right click menu
+    $('body').on('contextmenu', function() {
+        return false;
+    });
+
+    //Global variables to log time and time between click events
+    var startDate,
+        currentDay,
+        currentHours,
+        currentMinutes,
+        currentSeconds,
+        currentTime,
+        subtractDate,
+        subtractHours,
+        subtractMinutes,
+        subtractSeconds,
+        subtractTime,
+        timeSpent,
+        timeSpentHours,
+        timeSpentMinutes,
+        timeSpentSeconds,
+        loggedHours,
+        loggedMinutes,
+        loggedSeconds;
+
+    //Functions to capture date and time
+    function getCurrentTime() {
+        startDate = new Date();
+        currentDay = startDate.getDate();
+        currentHours = startDate.getHours();
+        currentMinutes = startDate.getMinutes();
+        currentSeconds = startDate.getSeconds();
+        currentTime = currentHours + ":" + currentMinutes + ":" + currentSeconds;
+    };
+
+    function calculateTime() {
+        loggedHours = currentHours;
+        loggedMinutes = currentMinutes;
+        loggedSeconds = currentSeconds;
+        subtractDate = new Date();
+        subtractHours = subtractDate.getHours();
+        subtractMinutes = subtractDate.getMinutes();
+        subtractSeconds = subtractDate.getSeconds();
+        subtractTime = subtractHours + ":" + subtractMinutes + ":" + subtractSeconds;
+        timeSpentHours = subtractHours - loggedHours;
+        timeSpentMinutes = subtractMinutes - loggedMinutes;
+        timeSpentSeconds = subtractSeconds - loggedSeconds;
+        timeSpent = timeSpentHours + ":" + timeSpentMinutes + ":" + timeSpentSeconds;
+    };
+
     //VIDEO FUNCTIONS DEFINED HERE
     //NOTE: store the needed video frame times in variables, use those across the script
     //NOTE: video ID's set in variables too
@@ -74,18 +124,19 @@ window.onload = function() {
 
     function loadProfile() {
         if (!profileLoaded) {
+            getCurrentTime();
             profileLoaded = true;
-            
+
             //Analytics: generate random 4 digit number to identify sessions
             //Generate session number
             sessionNo = Math.floor(Math.random()*9000) + 1000;
-            
+
             sessionNo = 'Session ID: ' + sessionNo + ' ';
-            
+
             console.log(sessionNo + 'started');
-            
+
             //Analytics identifier
-            ga('send', 'event', 'Main function', 'Motion sensor detected user', sessionNo + 'Main function started on profile: ' + currentProfile[0]);
+            ga('send', 'event', 'Main function', 'Switch detected user', sessionNo + 'Main function started on profile: ' + currentProfile[0] + ' on: ' + currentDay + 'th April at: ' + currentTime);
             
             //Run Warning modal window
             warningModal();
@@ -139,11 +190,13 @@ window.onload = function() {
             
             //2. Resume video on click
             $('#video_container').one('click', function(event) {
+                calculateTime();
+                getCurrentTime();
                 currentVideo.play();
                 console.log('replay');
                 $('#video_container').addClass('unclickable');
                 //Analytics identifier
-                ga('send', 'event', 'Screen tap', 'User tapped on video pause', sessionNo + 'App proceeds to load Phase 2');
+                ga('send', 'event', 'Screen tap', 'User tapped on video pause', sessionNo + 'App proceeds to load Phase 2 at: ' + currentTime + '. Time since last interaction: ' + timeSpent);
                 /*currentVideo.addEventListener('timeupdate', function(event) {
                     console.log(currentVideo.currentTime);
                 });*/
@@ -177,22 +230,28 @@ window.onload = function() {
 
         popupBtn.each(function() {
             $(this).on('click', function() {
-                popupClass = $(this).attr('class');
-                
-                console.log(popupClass);
+                calculateTime();
+                getCurrentTime();
+                popupClass = $(this).attr('class').split(' ');
+                console.log(popupClass[0]);
                 otherModals.fadeOut('slow');
                 $(this).next('div').fadeIn('slow');
                 resetModalTimer();
                 
                 //Analytics identifier
-                ga('send', 'event', 'Screen tap', 'Modal Popup', sessionNo + 'User chooses to see popup:' + popupClass);
+                ga('send', 'event', 'Screen tap', 'Modal Popup', sessionNo + 'User chooses to see popup:' + popupClass[0] + ' at: ' + currentTime + '. Time since last interaction: ' + timeSpent);
             });
         });
 
         //close btn function
         $('.patientPopup .close_btn').on('click', function() {
+            calculateTime();
+            getCurrentTime();
             $(this).parent('div').fadeOut('slow');
             resetModalTimer();
+
+            //Analytics identifier
+            ga('send', 'event', 'Screen tap', 'Modal Popup', sessionNo + 'User closes popup:' + popupClass[0] + ' at: ' + currentTime + '. Time since last interaction: ' + timeSpent);
         });
     };
 
@@ -202,8 +261,12 @@ window.onload = function() {
 
         patientBtn.each(function() {
             $(this).on('click', function() {
-                var switchProfile = $(this).attr('class')
+                calculateTime();
+                getCurrentTime();
+                var switchProfile = $(this).attr('class');
                 console.log(switchProfile);
+                currentProfile = switchProfile.split(' ');
+
 
                 /*$('#Container').removeClass(currentProfile[0]);
                 $('#Container').removeClass('Phase_2');*/
@@ -226,7 +289,7 @@ window.onload = function() {
 
                 
                 //Analytics identifier
-                ga('send', 'event', 'Screen tap', 'Profile switch', sessionNo + 'User chooses to navigate to: ' + switchProfile);
+                ga('send', 'event', 'Screen tap', 'Profile switch', sessionNo + 'User chooses to navigate to: ' + switchProfile + ' at: ' + currentTime + '. Time since last interaction: ' + timeSpent);
                 
             });
         });
@@ -268,14 +331,16 @@ window.onload = function() {
         function modalIncrement(){
             
             if(idleTime == 0){
-                console.log('5 minutes passed');
+                calculateTime();
+                getCurrentTime();
+                console.log('3 minutes passed');
                 $('#Container').addClass('unclickable');
                 $('#IdleModal').fadeIn('slow', function(){
                     counter = 20;
                     countDown = setInterval(modalTimer, 1000); //1000 will  run it every 1 second
                     
                     //Analytics identifier
-                    ga('send', 'event', 'Main function', 'User', sessionNo + 'was idle for long, therefore popup was shown');
+                    ga('send', 'event', 'Main function', 'User', sessionNo + 'was idle for long, therefore popup was shown at: ' + currentTime + '. Time since last interaction: ' + timeSpent);
                 });
             }
         };
@@ -329,7 +394,7 @@ window.onload = function() {
         console.log('Modal timeout completed, session' + sessionNo + 'ended.');
         
         //Analytics identifier
-        ga('send', 'event', 'Main function', 'User', sessionNo + 'went idle and did not return, dropping on profile: ' + currentProfile[0]);
+        ga('send', 'event', 'Main function', 'User', sessionNo + 'went idle and did not return, dropping on profile: ' + currentProfile[0] + ' at: ' + currentTime + '. Time since last interaction: ' + timeSpent);
         
         //IF anything bugs out on this function just refresh the page (comment everything below this line)
         $('#IdleModal').fadeOut('fast');
@@ -422,6 +487,4 @@ window.onload = function() {
         }
     });
 
-
-
-}
+};
